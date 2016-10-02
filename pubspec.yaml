@@ -1,0 +1,4 @@
+name: polymer_element
+version: 0.0.1
+dependencies:
+  js: any
