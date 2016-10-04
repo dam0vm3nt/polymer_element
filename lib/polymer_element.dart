@@ -1,10 +1,10 @@
 library polymer_element;
 
 import 'dart:html' as html;
+import 'dart:js_util' show callMethod,getProperty;
 
-abstract class PolymerElement implements html.HtmlElement  {
-  //PolymerElement() : super.created();
+class PolymerElement extends html.HtmlElement  {
+  PolymerElement() : super.created();
 
-
-  set(propertyName,value);
+  
 }
