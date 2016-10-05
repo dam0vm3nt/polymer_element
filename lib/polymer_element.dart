@@ -9,6 +9,12 @@ class Config {
   Config({this.observers});
 }
 
+class PolymerRegister {
+  final String tagName;
+  final String template;
+  const PolymerRegister(this.tagName,{this.template});
+}
+
 class PolymerElement extends html.HtmlElement {
   PolymerElement() : super.created() {
     _jsObject = new JsObject.fromBrowserObject(this);
