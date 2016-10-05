@@ -7,6 +7,9 @@
   ],
   "private": true,
   "dependencies": {
-    "polymer": "polymer#2.0-preview"
+    "polymer": "polymer#2.0-preview",
+    "paper-material": "PolymerElements/paper-material#2.0-preview",
+    "paper-button": "PolymerElements/paper-button#2.0-preview"
+
   }
 }
