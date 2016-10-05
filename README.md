@@ -4,4 +4,4 @@
 
 This package is part of an experimental support of `Polymer 2 (preview)` for Dart.
 
-See [here](https://github.com/dam0vm3nt/devc_builder) for more information. 
+See [here](https://pub.dartlang.org/packages/polymerize) for more information. 
