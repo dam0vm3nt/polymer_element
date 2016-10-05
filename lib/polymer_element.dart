@@ -15,6 +15,11 @@ class PolymerRegister {
   const PolymerRegister(this.tagName,{this.template});
 }
 
+class Observe {
+  final String observed;
+  const Observe(this.observed);
+}
+
 class PolymerElement extends html.HtmlElement {
   PolymerElement() : super.created() {
     _jsObject = new JsObject.fromBrowserObject(this);
@@ -26,6 +31,14 @@ class PolymerElement extends html.HtmlElement {
 
   connectedCallback() {
     _callSuper('connectedCallback');
+  }
+
+  disconnectedCallback() {
+    _callSuper('disconnectedCallback');
+  }
+
+  attributeChangedCallback(name, old, value) {
+    _callSuper('attributeChangedCallback',[name,old,value]);
   }
 
   // Private method can be overridden safely because they become Symbol ...
