@@ -66,6 +66,11 @@ This branch contains a preview of the Polymer 2.0 library.  The codebase is unde
 
      * If you're interested in using pieces of Polymer's functionality in _a la carte_ fashion, you can try defining your own base element class, utilizing a subset of the libraries. For now, this use case should be considered experimental, as the factoring of libraries is subject to change and is not part of the official Polymer 2.0 API.
 
+## Installing
+You can install Polymer 2.0 using bower:
+
+      bower install --save Polymer/polymer#2.0-preview
+
 ## 1.0 Compatibility Layer
 Polymer 2.0 retains the existing `polymer/polymer.html` import that current Polymer 1.0 users can continue to import, which strives to provide a very minimally-breaking change for code written to the Polymer 1.0 API.  For the most part, existing users upgrading to Polymer 2.0 will only need to adapt existing code to be compliant with the V1 Shadow DOM API related to content distribution and styling, as well as minor breaking changes introduced due to changes in the V1 Custom Elements spec and data-layer improvements listed [below](#breaking-changes).
 
@@ -74,12 +79,12 @@ With the widespread adoption of ES6 in browsers, as well as the requirement that
 
 Basic syntax looks like this:
 
-```
+```html
 <!-- Load the Polymer.Element base class -->
 <link rel="import" href="bower_components/polymer/polymer-element.html">
 ```
 
-```
+```js
 // Extend Polymer.Element base class
 class MyElement extends Polymer.Element {
   static get is() { return 'my-element'; }
@@ -103,7 +108,7 @@ customElements.define(MyElement.is, MyElement);
 
 Users can then leverage native subclassing support provided by ES6 to extend and customize existing elements defined using ES6 syntax:
 
-```
+```js
 // Subclass existing element
 class MyElementSubclass extends MyElement {
   static get is() { return 'my-element-subclass'; }
@@ -121,7 +126,7 @@ customElements.define(MyElementSubclass.is, MyElementSubclass);
 
 Below are the general steps for defining a custom element using this new syntax:
 
-* Extend from `Polymer.Element`. This class provides the minimal surface area to integrate with 2.0's data binding system. It provides only standard custom element lifecycle with the exception of `ready`. (You can extend from `Polymer.CompatElement` to get all of the Polymer 1.0 element api, but since most of this api was rarely used, this should not often be needed.)
+* Extend from `Polymer.Element`. This class provides the minimal surface area to integrate with 2.0's data binding system. It provides only standard custom element lifecycle with the addition of `ready`. (You can extend from `Polymer.LegacyElement` to get all of the Polymer 1.0 element api, but since most of this api was rarely used, this should not often be needed.)
 * Implement "behaviors" as [mixins that return class expressions](http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/)
 * Property metadata (`properties`) and multi-property/wildcard observers (`observers`) should be put on the class as a static in a property called `config`
 * Element's `is` property should be defined as a static on the class
@@ -185,28 +190,28 @@ Polymer 2.0 elements will target the V1 Custom Elements API, which primarily cha
 * Polymer will no longer produce type-extension elements (aka `is="..."`). Although they are still included in the V1 Custom Elements [spec](https://html.spec.whatwg.org/#custom-elements-customized-builtin-example) and scheduled for implementation in Chrome, because Apple [has stated](https://github.com/w3c/webcomponents/issues/509#issuecomment-233419167) it will not implement `is`, we will not be encouraging its use to avoid indefinite reliance on the Custom Elements polyfill. Instead, a wrapper custom element can surround a native element, e.g. `<a is="my-anchor">...</a>` could become `<my-anchor><a>...</a></my-anchor>`. Users will need to change existing `is` elements where necessary.
 * All template type extensions provided by Polymer have now been changed to standard custom elements that take a `<template>` in their light dom,  e.g.
 
-  ```
+  ```html
   <template is="dom-repeat" items="{{items}}">...</template>
   ```
 
   should change to
 
-  ```
+  ```html
   <dom-repeat items="{{items}}">
       <template>...</template>
   </dom-repeat>
   ```
 
-  For the time being, `Polymer()` will automatically wrap template extensions used in Polymer element templates during template processing for backward-compatibility, although we may decide to remove this auto-wrapping in the future.  Templates used in the main document must be manually wrapped.
+  For the time being, Polymer (both legacy and class API) will automatically wrap template extensions used in Polymer element templates during template processing for backward-compatibility, although we may decide to remove this auto-wrapping in the future.  Templates used in the main document must be manually wrapped.
 * The `custom-style` element has also been changed to a standard custom element that must wrap a style element  e.g.
 
-  ```
+  ```html
   <style is="custom-style">...</style>
   ```
 
    should change to
 
-   ```
+   ```html
    <custom-style>
      <style>...</style>
    </custom-style>
@@ -260,10 +265,8 @@ id is to use `id`.
 * Binding a default value of `false` via an _attribute binding_ to a boolean property will not override a default `true` property of the target, due to the semantics of boolean attributes.  In general, property binding should always be used when possible, and will avoid such situations.
 * `lazyRegister` option removed and all meta-programming (parsing template, creating accessors on prototype, etc.) is deferred until the first instance of the element is created
 * Polymer 2.0 uses ES2015 syntax, and can be run without transpilation in current Chrome, Safari 10, Safari Technology Preview, Firefox, and Edge.  Transpilation is required to run in IE11 and Safari 9.  We will be releasing tooling for development and production time to support this need in the future.
+* `Polymer.dom.flush` does not currently flush templates (`dom-repeat`, `dom-if`) or `observeNodes` observers.  Use `Polymer.Templatizer.flush` to flush templates, and `observer.flush` to flush individual `observeNodes` observers (where `observer` is the return value from `observeNodes`).
 
 ## Not yet implemented
-* Some utility functions are not yet implemented
-    * A number of utility functions that were previously on the Polymer 1.0 element prototype are not ported over yet.  These will warn with "not yet implemented" warnings.  In general, these can be avoided using standard DOM API.
 * `<array-selector>` not yet implemented
 * `Polymer.dom`: currently *most* of this is emulated, but some api's may be missing. Please file issues to determine if the missing behavior is an intended breaking change.
-* `Polymer.dom.observeNodes`: we're likely going to provide a breaking replacement for this that's more in the spirit of Shadow DOM V1.
