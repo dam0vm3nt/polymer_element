@@ -20,6 +20,15 @@ class Observe {
   const Observe(this.observed);
 }
 
+class Notify {
+  const Notify();
+}
+
+const Notify notify = const Notify();
+
+
+const _Undefined = const {};
+
 class PolymerElement extends html.HtmlElement {
   PolymerElement() : super.created() {
     _jsObject = new JsObject.fromBrowserObject(this);
@@ -45,4 +54,7 @@ class PolymerElement extends html.HtmlElement {
   //_invalidateProperties() => _jsObject.callMethod('_invalidateProperties', []);
 
   set(name, val) => _callSuper('set', [name, val]);
+
+  notifyPath(name,[val = _Undefined]) => val==_Undefined ? _callSuper('notifyPath', [name]) : _callSuper('notifyPath', [name,val]);
+
 }
