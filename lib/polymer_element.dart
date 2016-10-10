@@ -1,6 +1,7 @@
 library polymer_element;
 
 import 'dart:html' as html;
+import 'dart:html';
 import 'dart:js';
 
 class Config {
@@ -29,6 +30,24 @@ const Notify notify = const Notify();
 
 const _Undefined = const {};
 
+class EventOptions {
+
+  final bool bubbles;
+  final bool cancelable;
+  final HtmlElement node;
+
+  const EventOptions({this.bubbles:true,this.cancelable:false,this.node});
+}
+
+Event createCustomEvent(String type,[detail,EventOptions opt = const EventOptions()]) {
+  Event ev = new CustomEvent(type,canBubble : opt.bubbles,cancelable : opt.cancelable);
+  new JsObject.fromBrowserObject(window).callMethod('_addEventDetail',[ev,detail]);
+  //new JsObject.fromBrowserObject(ev)['detail'] = detail;
+  return ev;
+}
+
+getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
+
 class PolymerElement extends html.HtmlElement {
   PolymerElement() : super.created() {
     _jsObject = new JsObject.fromBrowserObject(this);
@@ -56,5 +75,20 @@ class PolymerElement extends html.HtmlElement {
   set(name, val) => _callSuper('set', [name, val]);
 
   notifyPath(name,[val = _Undefined]) => val==_Undefined ? _callSuper('notifyPath', [name]) : _callSuper('notifyPath', [name,val]);
+
+  push(path,vals) => _callSuper('push',[path,vals]);
+
+  shift(path,vals) => _callSuper('shift',[path,vals]);
+
+  splice(path,index,howmany,items) => _callSuper('splice',[path,index,howmany,items]);
+
+  // Legacy
+  //fire(String type, [ var details, EventOptions options = const
+  // EventOptions()]) => _callSuper('fire',[type,details,options]);
+
+
+
+
+
 
 }
