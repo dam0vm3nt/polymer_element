@@ -12,23 +12,18 @@
   "keywords": [
     "webcomponents"
   ],
-  "dependencies": {
-    "custom-elements": "webcomponents/custom-elements#master",
-    "shadydom": "webcomponents/shadydom#master",
-    "shadycss": "webcomponents/shadycss#master"
-  },
   "license": "BSD",
   "ignore": [],
   "devDependencies": {
     "web-component-tester": "^4.0.1"
   },
-  "_release": "9892fbccde",
+  "_release": "786eb4fe8c",
   "_resolution": {
     "type": "branch",
-    "branch": "v1",
-    "commit": "9892fbccde417a7b0cbf9c181e35b56e28d7e808"
+    "branch": "v1-polymer-edits",
+    "commit": "786eb4fe8c5ac80c2ac5d871c0b99cd2d403e878"
   },
-  "_source": "https://github.com/Polymer/webcomponentsjs.git",
-  "_target": "v1",
-  "_originalSource": "webcomponentsjs"
+  "_source": "git://github.com/webcomponents/webcomponentsjs.git",
+  "_target": "v1-polymer-edits",
+  "_originalSource": "webcomponents/webcomponentsjs"
 }

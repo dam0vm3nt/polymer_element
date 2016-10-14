@@ -24,7 +24,8 @@
     "iron-input": "PolymerElements/iron-input#2.0-preview",
     "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#2.0-preview",
     "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#2.0-preview",
-    "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior#2.0-preview"
+    "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior#2.0-preview",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1-polymer-edits"
   },
   "resolutions": {
     "iron-checked-element-behavior": "2.0-preview",
@@ -34,7 +35,7 @@
     "iron-a11y-keys-behavior": "2.0-preview",
     "iron-validatable-behavior": "2.0-preview",
     "paper-ripple": "2.0-preview",
-    "webcomponentsjs": "v1",
+    "webcomponentsjs": "v1-polymer-edits",
     "iron-meta": "2.0-preview"
   }
 }

@@ -13,11 +13,6 @@
   "keywords": [
     "webcomponents"
   ],
-  "dependencies": {
-    "custom-elements": "webcomponents/custom-elements#master",
-    "shadydom": "webcomponents/shadydom#master",
-    "shadycss": "webcomponents/shadycss#master"
-  },
   "license": "BSD",
   "ignore": [],
   "devDependencies": {
