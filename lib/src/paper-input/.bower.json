@@ -51,11 +51,11 @@
     "polymer": "2.0-preview",
     "webcomponentsjs": "v1"
   },
-  "_release": "671cf11ce5",
+  "_release": "9d90249622",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "671cf11ce516a034f3c269876935ad69279fe157"
+    "commit": "9d90249622544a2450d48f41d14c3387b3a2cd1f"
   },
   "_source": "git://github.com/PolymerElements/paper-input.git",
   "_target": "2.0-preview",

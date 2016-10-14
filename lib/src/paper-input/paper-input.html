@@ -123,7 +123,12 @@ style this element.
       }
     </style>
 
-    <paper-input-container no-label-float="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
+    <paper-input-container id="container"
+        no-label-float="[[noLabelFloat]]"
+        always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]"
+        auto-validate$="[[autoValidate]]"
+        disabled$="[[disabled]]"
+        invalid="[[invalid]]">
 
       <slot name="prefix" slot="prefix"></slot>
 
@@ -168,8 +173,17 @@ style this element.
 
       <slot name="suffix" slot="suffix"></slot>
 
-      <paper-input-error aria-live="assertive" hidden$="[[!errorMessage]]" slot="add-on">[[errorMessage]]</paper-input-error>
-      <paper-input-char-counter hidden$="[[!charCounter]]" slot="add-on"></paper-input-char-counter>
+      <dom-if if="[[errorMessage]]">
+        <template is="dom-if">
+          <paper-input-error aria-live="assertive" slot="add-on">[[errorMessage]]</paper-input-error>
+        </template>
+      </dom-if>
+
+      <dom-if if="[[charCounter]]">
+        <template is="dom-if">
+          <paper-input-char-counter slot="add-on"></paper-input-char-counter>
+        </template>
+      </dom-if>
 
     </paper-input-container>
   </template>
@@ -190,13 +204,19 @@ style this element.
           "time", "week", "file"];
     },
 
-    attached: function() {
-      // HACK eeeek
-      this.$.input._initSlottedInput();
+    listeners: {
+      'iron-input-ready': '_onIronInputReady'
+    },
 
+    _onIronInputReady: function() {
       if (this.inputElement &&
           this._typesThatHaveText.indexOf(this.$.nativeInput.type) !== -1) {
         this.alwaysFloatLabel = true;
+      }
+
+      // Only validate when attached if the input already has a value.
+      if (!!this.inputElement.bindValue) {
+        this.$.container._handleValueAndAutoValidate(this.inputElement);
       }
     },
   });

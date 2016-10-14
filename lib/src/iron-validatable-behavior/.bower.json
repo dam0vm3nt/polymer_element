@@ -32,11 +32,11 @@
   "resolutions": {
     "test-fixture": "custom-elements-v1"
   },
-  "_release": "9d2cc3054c",
+  "_release": "c1de49d678",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "9d2cc3054c2d59101c45c417c816c9814788e101"
+    "commit": "c1de49d678ea2258c3b75069386a42def62e872b"
   },
   "_source": "git://github.com/PolymerElements/iron-validatable-behavior.git",
   "_target": "2.0-preview",

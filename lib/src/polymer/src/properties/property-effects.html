@@ -173,7 +173,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     } else {
       if (node._hasPropertyEffect && node._hasPropertyEffect(property)) {
         inst._setPropertyToNodeFromAnnotation(node, property, value);
-      } else if (inst._shouldPropChange(node[property], value)) {
+      } else if (inst._shouldPropChange(property, node[property], value)) {
         node[property] = value;
       }
     }
@@ -627,6 +627,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _isPropertyPending(prop) {
         return this.__dataPending && (prop in this.__dataPending);
+      }
+
+      _setPendingProperty(prop, value) {
+        // clear cached paths
+        if (typeof value == 'object') {
+          for (var p in this.__data) {
+            if (Polymer.Path.isDescendant(prop, p)) {
+              this.__data[p] = undefined;
+            }
+          }
+        }
+        return super._setPendingProperty(prop, value);
       }
 
       // Prototype setup ----------------------------------------
