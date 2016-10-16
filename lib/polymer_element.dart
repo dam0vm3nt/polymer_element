@@ -13,7 +13,8 @@ class Config {
 class PolymerRegister {
   final String tagName;
   final String template;
-  const PolymerRegister(this.tagName,{this.template});
+  final bool native;
+  const PolymerRegister(this.tagName,{this.template,this.native:false});
 }
 
 class Observe {
@@ -56,6 +57,10 @@ class PolymerElement extends html.HtmlElement {
   JsObject _jsObject;
   JsObject _callSuper(String name, [List args = const []]) =>
       _jsObject.callMethod('__callSuper', [name, args]);
+
+  var $;
+
+  $$(String selector) {}
 
   connectedCallback() {
     _callSuper('connectedCallback');
