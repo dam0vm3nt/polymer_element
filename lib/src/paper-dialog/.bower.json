@@ -1,0 +1,53 @@
+{
+  "name": "paper-dialog",
+  "description": "A Material Design dialog",
+  "authors": "The Polymer Authors",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "dialog",
+    "overlay"
+  ],
+  "main": "paper-dialog.html",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/paper-dialog"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/PolymerElements/paper-dialog",
+  "ignore": [],
+  "dependencies": {
+    "neon-animation": "PolymerElements/neon-animation#2.0-preview",
+    "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#2.0-preview",
+    "polymer": "Polymer/polymer#2.0-preview"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
+    "paper-button": "PolymerElements/paper-button#2.0-preview",
+    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#2.0-preview",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.0-preview",
+    "paper-item": "PolymerElements/paper-item#2.0-preview",
+    "paper-listbox": "PolymerElements/paper-listbox#2.0-preview",
+    "test-fixture": "PolymerElements/test-fixture#custom-elements-v1",
+    "web-animations-js": "web-animations/web-animations-js#^2.2.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
+  },
+  "resolutions": {
+    "polymer": "2.0-preview",
+    "test-fixture": "custom-elements-v1",
+    "webcomponentsjs": "v1"
+  },
+  "_release": "7bd2fb5002",
+  "_resolution": {
+    "type": "branch",
+    "branch": "2.0-preview",
+    "commit": "7bd2fb500256bbfa579da429224ae87e8093b8b3"
+  },
+  "_source": "git://github.com/PolymerElements/paper-dialog.git",
+  "_target": "2.0-preview",
+  "_originalSource": "PolymerElements/paper-dialog"
+}

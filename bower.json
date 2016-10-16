@@ -18,6 +18,7 @@
     "iron-behaviors": "PolymerElements/iron-behaviors#2.0-preview",
     "paper-behaviors": "PolymerElements/paper-behaviors#2.0-preview",
     "paper-ripple": "PolymerElements/paper-ripple#2.0-preview",
+    "paper-dialog": "PolymerElements/paper-dialog#2.0-preview",
     "iron-meta": "PolymerElements/iron-meta#2.0-preview",
     "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview",
     "iron-input": "PolymerElements/iron-input#2.0-preview",

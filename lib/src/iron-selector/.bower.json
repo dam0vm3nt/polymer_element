@@ -1,0 +1,52 @@
+{
+  "name": "iron-selector",
+  "description": "Manages a set of elements that can be selected",
+  "private": true,
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "main": [
+    "iron-selector.html",
+    "iron-multi-selectable.html",
+    "iron-selectable.html",
+    "iron-selection.html"
+  ],
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "selector"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/iron-selector.git"
+  },
+  "homepage": "https://github.com/PolymerElements/iron-selector",
+  "ignore": [],
+  "dependencies": {
+    "polymer": "Polymer/polymer#2.0-preview"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "iron-test-helpers": "polymerelements/iron-test-helpers#2.0-preview",
+    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
+    "test-fixture": "PolymerElements/test-fixture#custom-elements-v1",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
+  },
+  "resolutions": {
+    "test-fixture": "custom-elements-v1",
+    "webcomponentsjs": "v1",
+    "polymer": "2.0-preview",
+    "iron-a11y-keys-behavior": "2.0-preview"
+  },
+  "_release": "92ba94f538",
+  "_resolution": {
+    "type": "branch",
+    "branch": "2.0-preview",
+    "commit": "92ba94f5381068251660c5dd45cf803f38f8b2de"
+  },
+  "_source": "git://github.com/PolymerElements/iron-selector.git",
+  "_target": "2.0-preview",
+  "_originalSource": "PolymerElements/iron-selector"
+}
