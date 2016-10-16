@@ -1,5 +1,6 @@
 library polymer_element;
 
+import 'dart:async';
 import 'dart:html' as html;
 import 'dart:html';
 import 'dart:js';
@@ -90,10 +91,5 @@ class PolymerElement extends html.HtmlElement {
   // Legacy
   //fire(String type, [ var details, EventOptions options = const
   // EventOptions()]) => _callSuper('fire',[type,details,options]);
-
-
-
-
-
 
 }
