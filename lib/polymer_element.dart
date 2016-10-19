@@ -18,6 +18,12 @@ class PolymerRegister {
   const PolymerRegister(this.tagName,{this.template,this.native:false});
 }
 
+class Define {
+  final String tagName;
+  final String htmlFile;
+  const Define({this.tagName,this.htmlFile});
+}
+
 class Observe {
   final String observed;
   const Observe(this.observed);
