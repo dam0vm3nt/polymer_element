@@ -1,9 +1,24 @@
+@JS()
+library require;
+
 import 'dart:async';
 import 'dart:js';
 
-Future<List<JsObject>> require(List<String> modules) {
-  Completer<List<JsObject>> whenLoaded = new Completer();
+import 'package:js/js.dart';
+import 'package:js/js_util.dart';
 
+@JS('require')
+external _require(List modules,Function body);
+
+Future<List> require(List<String> modules) {
+  Completer<List> whenLoaded = new Completer();
+
+  _require(['polymer_element/utils'],(utils) {
+    callMethod(utils,'require_varargs',[modules,(res) {
+        whenLoaded.complete(res);
+    }]);
+  });
+/*
   context.callMethod('require', [
     new JsArray.from(['polymer_element/utils']),
     (JsObject utils) {
@@ -15,6 +30,6 @@ Future<List<JsObject>> require(List<String> modules) {
       ]);
     }
   ]);
-
+*/
   return whenLoaded.future;
 }

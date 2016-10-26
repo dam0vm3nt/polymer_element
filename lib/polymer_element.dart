@@ -1,9 +1,13 @@
+@JS('Polymer')
 library polymer_element;
 
 import 'dart:async';
 import 'dart:html' as html;
 import 'dart:html';
 import 'dart:js';
+import 'package:js/js_util.dart';
+import 'package:js/js.dart';
+
 
 class Config {
   List observers;
@@ -47,6 +51,7 @@ class EventOptions {
   const EventOptions({this.bubbles:true,this.cancelable:false,this.node});
 }
 
+
 Event createCustomEvent(String type,[detail,EventOptions opt = const EventOptions()]) {
   Event ev = new CustomEvent(type,canBubble : opt.bubbles,cancelable : opt.cancelable);
   new JsObject.fromBrowserObject(window).callMethod('_addEventDetail',[ev,detail]);
@@ -56,46 +61,37 @@ Event createCustomEvent(String type,[detail,EventOptions opt = const EventOption
 
 getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
-class PolymerElement extends html.HtmlElement {
-  PolymerElement() : super.created() {
-    _jsObject = new JsObject.fromBrowserObject(this);
+
+@JS('Element')
+class _PolymerElement extends html.HtmlElement {
+  _PolymerElement() : super.created() {
   }
 
-  JsObject _jsObject;
-  JsObject _callSuper(String name, [List args = const []]) =>
-      _jsObject.callMethod('__callSuper', [name, args]);
+  external get $;
 
-  var $;
+  external $$(String selector);
 
-  $$(String selector) {}
+  external connectedCallback();
 
-  connectedCallback() {
-    _callSuper('connectedCallback');
-  }
+  external disconnectedCallback();
 
-  disconnectedCallback() {
-    _callSuper('disconnectedCallback');
-  }
-
-  attributeChangedCallback(name, old, value) {
-    _callSuper('attributeChangedCallback',[name,old,value]);
-  }
+  external attributeChangedCallback(name, old, value);
 
   // Private method can be overridden safely because they become Symbol ...
   //_invalidateProperties() => _jsObject.callMethod('_invalidateProperties', []);
 
-  set(name, val) => _callSuper('set', [name, val]);
+  external set(name, val);
 
-  notifyPath(name,[val = _Undefined]) => val==_Undefined ? _callSuper('notifyPath', [name]) : _callSuper('notifyPath', [name,val]);
+  external notifyPath(name,[val = _Undefined]);
 
-  push(path,vals) => _callSuper('push',[path,vals]);
+  external push(path,vals);
 
-  shift(path,vals) => _callSuper('shift',[path,vals]);
+  external shift(path,vals);
 
-  splice(path,index,howmany,items) => _callSuper('splice',[path,index,howmany,items]);
+  external splice(path,index,howmany,items);
 
-  // Legacy
-  //fire(String type, [ var details, EventOptions options = const
-  // EventOptions()]) => _callSuper('fire',[type,details,options]);
+}
+
+class PolymerElement extends _PolymerElement {
 
 }

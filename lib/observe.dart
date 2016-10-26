@@ -1,13 +1,24 @@
-import 'dart:async';
-import 'dart:js';
-import 'package:polymer_element/require.dart';
+@JS()
+library observe;
 
-JsObject _observe_support;
+import 'dart:async';
+import 'package:polymer_element/require.dart';
+import 'package:js/js.dart';
+
+@JS()
+@anonymous
+class _Support {
+  external makeObservable(obj, observer callback);
+  external cancelObserver(obj, observer callback);
+}
+
+
+var _observe_support;
 
 Future get whenReady async {
   if (_observe_support == null) {
-    _observe_support =
-        (await require(['polymer_element/observe_support'])).single;
+    _observe_support = (await require(['polymer_element/observe_support']))
+        .single;
   }
   return true;
 }
@@ -21,10 +32,8 @@ typedef observer(String propertyName, oldValue, newValue);
  * Calling it on an already observable object returns the same object but
  * adds a listener.
  */
-makeObservable(obj, observer callback) {
-  return _observe_support.callMethod('makeObservable', [obj, callback]);
-}
+makeObservable(obj, observer callback) =>
+    _observe_support.makeObservable(obj, callback);
 
-cancelObserver(obj, observer callback) {
-  _observe_support.callMethod('cancelObserver', [obj, callback]);
-}
+cancelObserver(obj, observer callback) =>
+    _observe_support.cancelObserver(obj, callback);
