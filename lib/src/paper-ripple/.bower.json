@@ -43,11 +43,11 @@
     "iron-meta": "2.0-preview"
   },
   "homepage": "https://github.com/PolymerElements/paper-ripple",
-  "_release": "9188025500",
+  "_release": "4786f2aa7f",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "9188025500e09dbb63db5d7419ff53b963c2b1cd"
+    "commit": "4786f2aa7fbe2b55f30c6ae607ecb64a375fca73"
   },
   "_source": "git://github.com/PolymerElements/paper-ripple.git",
   "_target": "2.0-preview",

@@ -31,20 +31,19 @@
     "iron-test-helpers": "polymerelements/iron-test-helpers#2.0-preview",
     "paper-styles": "PolymerElements/paper-styles#2.0-preview",
     "test-fixture": "PolymerElements/test-fixture#custom-elements-v1",
-    "web-component-tester": "^4.0.0",
+    "web-component-tester": "^5.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
   "resolutions": {
     "test-fixture": "custom-elements-v1",
     "webcomponentsjs": "v1",
-    "polymer": "2.0-preview",
-    "iron-a11y-keys-behavior": "2.0-preview"
+    "polymer": "2.0-preview"
   },
-  "_release": "92ba94f538",
+  "_release": "11895b9427",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "92ba94f5381068251660c5dd45cf803f38f8b2de"
+    "commit": "11895b942784689d217a1910f9320906ee85291e"
   },
   "_source": "git://github.com/PolymerElements/iron-selector.git",
   "_target": "2.0-preview",
