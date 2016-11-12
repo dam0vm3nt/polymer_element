@@ -63,8 +63,8 @@ getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 
 @JS('Element')
-class _PolymerElement extends html.HtmlElement {
-  _PolymerElement() : super.created() {
+class PolymerElement extends html.HtmlElement {
+  PolymerElement() : super.created() {
   }
 
   external get $;
@@ -89,9 +89,5 @@ class _PolymerElement extends html.HtmlElement {
   external shift(path,vals);
 
   external splice(path,index,howmany,items);
-
-}
-
-class PolymerElement extends _PolymerElement {
 
 }
