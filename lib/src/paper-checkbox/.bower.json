@@ -42,11 +42,11 @@
     "webcomponentsjs": "v1",
     "test-fixture": "custom-elements-v1"
   },
-  "_release": "bbfe8dda76",
+  "_release": "65ba0ff710",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "bbfe8dda760f2b8ca8605507ab46dd7c941e947a"
+    "commit": "65ba0ff7105b3a277c7e376338d44e8cafc1c245"
   },
   "_source": "git://github.com/PolymerElements/paper-checkbox.git",
   "_target": "2.0-preview",

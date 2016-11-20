@@ -33,11 +33,11 @@
     "test-fixture": "ce-v1"
   },
   "homepage": "https://github.com/Polymer/polymer",
-  "_release": "c70130d55a",
+  "_release": "807cb7fdfb",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "c70130d55a53229756ada58e2f4b86ffc0bc6801"
+    "commit": "807cb7fdfb64df7fe18c8fb61a8f24e36571021a"
   },
   "_source": "https://github.com/Polymer/polymer.git",
   "_target": "2.0-preview",

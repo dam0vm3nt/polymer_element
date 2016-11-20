@@ -53,11 +53,11 @@
     "iron-a11y-keys-behavior": "2.0-preview",
     "iron-validatable-behavior": "2.0-preview"
   },
-  "_release": "1895fb33ea",
+  "_release": "73bf77e9ec",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "1895fb33eaa4748065b709dd8373d5b510c14931"
+    "commit": "73bf77e9ec05732919104044122be7556aafdf3b"
   },
   "_source": "git://github.com/PolymerElements/paper-button.git",
   "_target": "2.0-preview",
