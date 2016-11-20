@@ -29,7 +29,7 @@ class Module {
     context.callMethod('require', [
       new JsArray.from([
         '${packageName}/${packageName}',
-        'polymer_element/module_helper.js'
+        'external/polymer_element/module_helper.js'
       ]),
       (JsObject pkg, JsObject helper) {
         whenLoaded.complete(new Module._(pkg, helper));

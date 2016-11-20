@@ -13,7 +13,7 @@ external _require(List modules,Function body);
 Future<List> require(List<String> modules) {
   Completer<List> whenLoaded = new Completer();
 
-  _require(['polymer_element/utils'],(utils) {
+  _require(['external/polymer_element/utils'],(utils) {
     callMethod(utils,'require_varargs',[modules,(res) {
         whenLoaded.complete(res);
     }]);

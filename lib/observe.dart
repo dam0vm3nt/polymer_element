@@ -17,7 +17,7 @@ var _observe_support;
 
 Future get whenReady async {
   if (_observe_support == null) {
-    _observe_support = (await require(['polymer_element/observe_support']))
+    _observe_support = (await require(['external/polymer_element/observe_support']))
         .single;
   }
   return true;
