@@ -19,7 +19,8 @@ class PolymerRegister {
   final String tagName;
   final String template;
   final bool native;
-  const PolymerRegister(this.tagName,{this.template,this.native:false});
+  final List<Type> uses;
+  const PolymerRegister(this.tagName,{this.template,this.native:false,this.uses});
 }
 
 class Define {
