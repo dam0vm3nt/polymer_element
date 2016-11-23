@@ -3,6 +3,6 @@ author: Vittorio Ballestra <vittorio.ballestra@gmail.com>
 homepage: https://github.com/dam0vm3nt
 description: Polymer-2 support for Dart
 
-version: 0.1.0
+version: 0.1.0+1
 dependencies:
   js: any
