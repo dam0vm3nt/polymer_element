@@ -34,11 +34,11 @@
   "resolutions": {
     "test-fixture": "custom-elements-v1"
   },
-  "_release": "fcab514909",
+  "_release": "60e8fcd364",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "fcab5149096d7cc3e1e3bdeb713bb38d2965685b"
+    "commit": "60e8fcd3646e8efc6bd72efd94f4d7e224899b4e"
   },
   "_source": "git://github.com/PolymerElements/iron-input.git",
   "_target": "2.0-preview",

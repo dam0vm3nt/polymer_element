@@ -7,27 +7,32 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-<link rel="import" href="../../polymer/polymer.html">
-<link rel="import" href="../iron-fit-behavior.html">
 
-<dom-module id="test-fit">
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="test-buttons.html">
+
+<dom-module id="test-buttons-wrapper">
   <template>
     <style>
       :host {
         display: block;
-        background: black;
-        color: white;
-        padding: 8px;
+        border: 1px solid gray;
+        padding: 10px;
       }
     </style>
-    <slot></slot>
+
+    <select id="select">
+      <option>1</option>
+    </select>
+    <test-buttons id="wrapped">
+      <slot></slot>
+    </test-buttons>
+    <div tabindex="0" id="focusableDiv">Focusable div</div>
   </template>
+
   <script>
     Polymer({
-      is: 'test-fit',
-      behaviors: [
-        Polymer.IronFitBehavior
-      ]
+      is: 'test-buttons-wrapper'
     });
   </script>
 </dom-module>

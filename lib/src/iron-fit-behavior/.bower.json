@@ -20,24 +20,36 @@
     "polymer": "Polymer/polymer#2.0-preview"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
     "test-fixture": "PolymerElements/test-fixture#custom-elements-v1",
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
-  "resolutions": {
-    "polymer": "2.0-preview",
-    "test-fixture": "custom-elements-v1",
-    "iron-flex-layout": "2.0-preview"
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.0.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
   },
   "ignore": [],
+  "resolutions": {
+    "test-fixture": "custom-elements-v1"
+  },
   "homepage": "https://github.com/PolymerElements/iron-fit-behavior",
-  "_release": "5f52fcbb22",
+  "_release": "9c4d0b4112",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "5f52fcbb22f38b8a6e20422b57fab2e81529ed4e"
+    "commit": "9c4d0b41127ff8ca25305321ec558e98141b2573"
   },
   "_source": "git://github.com/PolymerElements/iron-fit-behavior.git",
   "_target": "2.0-preview",

@@ -24,30 +24,42 @@
   },
   "devDependencies": {
     "paper-styles": "PolymerElements/paper-styles#2.0-preview",
-    "iron-component-page": "polymerelements/iron-component-page#1.0.0",
+    "iron-component-page": "polymerelements/iron-component-page#2.0-preview",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0-preview",
     "iron-meta": "PolymerElements/iron-meta#2.0-preview",
     "webcomponentsjs": "webcomponents/webcomponentsjs#v1",
     "web-component-tester": "^4.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "iron-icon": "polymerelements/iron-icon#^1.0.0",
+        "iron-iconset-svg": "polymerelements/iron-iconset-svg#^1.0.0",
+        "polymer": "Polymer/polymer#^1.0.0"
+      },
+      "devDependencies": {
+        "paper-styles": "polymerelements/paper-styles#^1.0.2",
+        "iron-component-page": "polymerelements/iron-component-page#1.0.0",
+        "iron-flex-layout": "polymerelements/iron-flex-layout#^1.0.0",
+        "iron-meta": "polymerelements/iron-meta#^1.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+        "web-component-tester": "^4.0.0"
+      }
+    }
   },
   "ignore": [
     "util",
     "update-icons.sh"
   ],
   "resolutions": {
-    "iron-icon": "2.0-preview",
-    "iron-meta": "2.0-preview",
-    "iron-iconset-svg": "2.0-preview",
-    "iron-flex-layout": "2.0-preview",
     "webcomponentsjs": "v1",
-    "polymer": "2.0-preview",
-    "paper-styles": "2.0-preview"
+    "polymer": "2.0-preview"
   },
-  "_release": "f562c0571c",
+  "_release": "799666be40",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "f562c0571cbfd43f435e374f552fdc40d8057895"
+    "commit": "799666be40e57bd098e4abb666520ee01eea9f90"
   },
   "_source": "git://github.com/PolymerElements/iron-icons.git",
   "_target": "2.0-preview",

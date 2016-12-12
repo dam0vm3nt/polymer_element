@@ -22,25 +22,37 @@
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
     "test-fixture": "PolymerElements/test-fixture#custom-elements-v1",
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.7.0"
+      },
+      "devDependencies": {
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  },
   "resolutions": {
-    "polymer": "2.0-preview",
-    "test-fixture": "custom-elements-v1",
-    "webcomponentsjs": "v1",
-    "iron-flex-layout": "2.0-preview"
+    "test-fixture": "custom-elements-v1"
   },
   "ignore": [],
   "homepage": "https://github.com/PolymerElements/iron-a11y-keys-behavior",
-  "_release": "60277a5340",
+  "_release": "e01c6f12bb",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "60277a5340541809197372970f91a42eab763ee3"
+    "commit": "e01c6f12bbcc3dfcfd00bf0fbed0849c7aec64dd"
   },
   "_source": "git://github.com/PolymerElements/iron-a11y-keys-behavior.git",
   "_target": "2.0-preview",

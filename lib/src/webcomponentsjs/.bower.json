@@ -22,11 +22,11 @@
   "devDependencies": {
     "web-component-tester": "^4.0.1"
   },
-  "_release": "41898d4c06",
+  "_release": "d133399dc7",
   "_resolution": {
     "type": "branch",
     "branch": "v1",
-    "commit": "41898d4c06813ce7d8755835cef71cd1631b7fec"
+    "commit": "d133399dc77f73431df9ea7d28827f4cb266c9b0"
   },
   "_source": "git://github.com/webcomponents/webcomponentsjs.git",
   "_target": "v1",

@@ -24,20 +24,33 @@
     "test-fixture": "polymerelements/test-fixture#custom-elements-v1",
     "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "polymer/polymer#^1.0.0"
+      },
+      "devDependencies": {
+        "paper-styles": "polymerelements/paper-styles#^1.0.0",
+        "test-fixture": "polymerelements/test-fixture#^1.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  },
   "main": "iron-meta.html",
   "ignore": [],
   "resolutions": {
     "paper-styles": "2.0-preview",
     "iron-flex-layout": "2.0-preview",
     "polymer": "2.0-preview",
-    "webcomponentsjs": "v1"
+    "webcomponentsjs": "v1",
+    "test-fixture": "custom-elements-v1"
   },
   "homepage": "https://github.com/PolymerElements/iron-meta",
-  "_release": "4bbd39d04c",
+  "_release": "03aab5f8d2",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "4bbd39d04cfd5ab2c0213b9ef1f8ad6c37ee9b5d"
+    "commit": "03aab5f8d2ee26de8402a2d87890a89817e51815"
   },
   "_source": "git://github.com/PolymerElements/iron-meta.git",
   "_target": "2.0-preview",

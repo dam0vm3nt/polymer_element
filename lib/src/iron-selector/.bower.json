@@ -34,16 +34,31 @@
     "web-component-tester": "^5.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
   },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.2.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "iron-test-helpers": "polymerelements/iron-test-helpers#^1.0.0",
+        "paper-styles": "PolymerElements/paper-styles#^1.0.4",
+        "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  },
   "resolutions": {
     "test-fixture": "custom-elements-v1",
     "webcomponentsjs": "v1",
     "polymer": "2.0-preview"
   },
-  "_release": "11895b9427",
+  "_release": "80e1dc50c3",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "11895b942784689d217a1910f9320906ee85291e"
+    "commit": "80e1dc50c3b071d050289116230547c97933d16e"
   },
   "_source": "git://github.com/PolymerElements/iron-selector.git",
   "_target": "2.0-preview",

@@ -32,6 +32,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         /* For quicker tests */
         --iron-overlay-backdrop: {
           transition: none;
+          /* Safari 10 requires prefix */
+          -webkit-transition: none;
         }
       }
     </style></custom-style>
@@ -196,7 +198,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           runAfterOpen(overlay, function() {
             var spy = sinon.spy(overlay, 'refit');
             overlay.fire('iron-resize');
-            requestAnimationFrame(function() {
+            Polymer.RenderStatus.afterNextRender(overlay, function() {
               assert.isTrue(spy.called, 'overlay did refit');
               done();
             });
@@ -206,7 +208,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         test('closed overlay does not refit on iron-resize', function(done) {
           var spy = sinon.spy(overlay, 'refit');
           overlay.fire('iron-resize');
-          requestAnimationFrame(function() {
+          Polymer.RenderStatus.afterNextRender(overlay, function() {
             assert.isFalse(spy.called, 'overlay should not refit');
             done();
           });
@@ -240,8 +242,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           window.addEventListener('resize', function() { callCount--; }, true);
           overlay.addEventListener('iron-resize', function() { callCount++; });
           Polymer.dom(overlay).appendChild(document.createElement('div'));
-          // MutationObserver executed in next microtask, so wait a tick.
-          setTimeout(function() {
+          // Wait for MutationObserver to be executed.
+          Polymer.RenderStatus.afterNextRender(overlay, function() {
             assert.equal(callCount, 0, 'iron-resize should not be called');
             done();
           });
@@ -252,8 +254,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var spy = sinon.stub();
             overlay.addEventListener('iron-resize', spy);
             Polymer.dom(overlay).appendChild(document.createElement('div'));
-            // MutationObserver executed in next microtask, so wait a tick.
-            setTimeout(function() {
+            // Wait for MutationObserver to be executed.
+            Polymer.RenderStatus.afterNextRender(overlay, function() {
               assert.equal(spy.callCount, 1, 'iron-resize should be called once');
               done();
             });
@@ -564,44 +566,56 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           overlayFocusableNodes = f[2];
         });
 
-        test('_focusableNodes returns nodes that are focusable', function() {
-          var focusableNodes = overlay._focusableNodes;
-          assert.equal(focusableNodes.length, 3, '3 nodes are focusable');
-          assert.equal(focusableNodes[0], Polymer.dom(overlay).querySelector('.focusable1'));
-          assert.equal(focusableNodes[1], Polymer.dom(overlay).querySelector('.focusable2'));
-          assert.equal(focusableNodes[2], Polymer.dom(overlay).querySelector('.focusable3'));
+        test('_focusableNodes returns nodes that are focusable', function(done) {
+          runAfterOpen(overlay, function() {
+            var focusableNodes = overlay._focusableNodes;
+            assert.equal(focusableNodes.length, 3, '3 nodes are focusable');
+            assert.equal(focusableNodes[0], Polymer.dom(overlay).querySelector('.focusable1'));
+            assert.equal(focusableNodes[1], Polymer.dom(overlay).querySelector('.focusable2'));
+            assert.equal(focusableNodes[2], Polymer.dom(overlay).querySelector('.focusable3'));
+            done();
+          });
         });
 
-        test('_focusableNodes includes overlay if it has a valid tabindex', function() {
-          overlay.setAttribute('tabindex', '0');
-          var focusableNodes = overlay._focusableNodes;
-          assert.equal(focusableNodes.length, 4, '4 focusable nodes');
-          assert.notEqual(focusableNodes.indexOf(overlay), -1, 'overlay is included');
+        test('_focusableNodes includes overlay if it has a valid tabindex', function(done) {
+          runAfterOpen(overlay, function() {
+            overlay.setAttribute('tabindex', '0');
+            var focusableNodes = overlay._focusableNodes;
+            assert.equal(focusableNodes.length, 4, '4 focusable nodes');
+            assert.notEqual(focusableNodes.indexOf(overlay), -1, 'overlay is included');
+            done();
+          });
         });
 
-        test('_focusableNodes respects the tabindex order', function() {
-          var focusableNodes = overlayWithTabIndex._focusableNodes;
-          assert.equal(focusableNodes.length, 6, '6 nodes are focusable');
-          assert.equal(focusableNodes[0], Polymer.dom(overlayWithTabIndex).querySelector('.focusable1'));
-          assert.equal(focusableNodes[1], Polymer.dom(overlayWithTabIndex).querySelector('.focusable2'));
-          assert.equal(focusableNodes[2], Polymer.dom(overlayWithTabIndex).querySelector('.focusable3'));
-          assert.equal(focusableNodes[3], Polymer.dom(overlayWithTabIndex).querySelector('.focusable4'));
-          assert.equal(focusableNodes[4], Polymer.dom(overlayWithTabIndex).querySelector('.focusable5'));
-          assert.equal(focusableNodes[5], Polymer.dom(overlayWithTabIndex).querySelector('.focusable6'));
+        test('_focusableNodes respects the tabindex order', function(done) {
+          runAfterOpen(overlayWithTabIndex, function() {
+            var focusableNodes = overlayWithTabIndex._focusableNodes;
+            assert.equal(focusableNodes.length, 6, '6 nodes are focusable');
+            assert.equal(focusableNodes[0], Polymer.dom(overlayWithTabIndex).querySelector('.focusable1'));
+            assert.equal(focusableNodes[1], Polymer.dom(overlayWithTabIndex).querySelector('.focusable2'));
+            assert.equal(focusableNodes[2], Polymer.dom(overlayWithTabIndex).querySelector('.focusable3'));
+            assert.equal(focusableNodes[3], Polymer.dom(overlayWithTabIndex).querySelector('.focusable4'));
+            assert.equal(focusableNodes[4], Polymer.dom(overlayWithTabIndex).querySelector('.focusable5'));
+            assert.equal(focusableNodes[5], Polymer.dom(overlayWithTabIndex).querySelector('.focusable6'));
+            done();
+          });
         });
 
-        test('_focusableNodes can be overridden', function() {
-          // It has 1 focusable in the light dom, and 2 in the shadow dom.
-          var focusableNodes = overlayFocusableNodes._focusableNodes;
-          assert.equal(focusableNodes.length, 2, 'length ok');
-          assert.equal(focusableNodes[0], overlayFocusableNodes.$.first, 'first ok');
-          assert.equal(focusableNodes[1], overlayFocusableNodes.$.last, 'last ok');
+        test('_focusableNodes can be overridden', function(done) {
+          runAfterOpen(overlayFocusableNodes, function() {
+            // It has 1 focusable in the light dom, and 2 in the shadow dom.
+            var focusableNodes = overlayFocusableNodes._focusableNodes;
+            assert.equal(focusableNodes.length, 2, 'length ok');
+            assert.equal(focusableNodes[0], overlayFocusableNodes.$.first, 'first ok');
+            assert.equal(focusableNodes[1], overlayFocusableNodes.$.last, 'last ok');
+            done();
+          });
         });
 
         test('with-backdrop: TAB & Shift+TAB wrap focus', function(done) {
           overlay.withBackdrop = true;
-          var focusableNodes = overlay._focusableNodes;
           runAfterOpen(overlay, function() {
+            var focusableNodes = overlay._focusableNodes;
             // 1ms timeout needed by IE10 to have proper focus switching.
             Polymer.Base.async(function() {
               // Go to last element.
@@ -628,8 +642,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('with-backdrop: TAB & Shift+TAB wrap focus respecting tabindex', function(done) {
           overlayWithTabIndex.withBackdrop = true;
-          var focusableNodes = overlayWithTabIndex._focusableNodes;
           runAfterOpen(overlayWithTabIndex, function() {
+            var focusableNodes = overlayWithTabIndex._focusableNodes;
             // 1ms timeout needed by IE10 to have proper focus switching.
             Polymer.Base.async(function() {
               // Go to last element.
@@ -647,8 +661,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('with-backdrop: Shift+TAB after open wrap focus', function(done) {
           overlay.withBackdrop = true;
-          var focusableNodes = overlay._focusableNodes;
           runAfterOpen(overlay, function() {
+            var focusableNodes = overlay._focusableNodes;
             // 1ms timeout needed by IE10 to have proper focus switching.
             Polymer.Base.async(function() {
               // Spy keydown.
@@ -668,8 +682,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('with-backdrop: after open, update last focusable node and then Shift+TAB', function(done) {
           overlay.withBackdrop = true;
-          var focusableNodes = overlay._focusableNodes;
           runAfterOpen(overlay, function() {
+            var focusableNodes = overlay._focusableNodes;
             // 1ms timeout needed by IE10 to have proper focus switching.
             Polymer.Base.async(function() {
               // Before tabbing, make lastFocusable non-tabbable. This will make

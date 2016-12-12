@@ -36,11 +36,11 @@
   "resolutions": {
     "test-fixture": "custom-elements-v1"
   },
-  "_release": "b27a45e39f",
+  "_release": "9867805b31",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "b27a45e39fe517974f8e27326ca982c83caf2346"
+    "commit": "9867805b314545cdea94e29e9884f3f5af240564"
   },
   "_source": "git://github.com/PolymerElements/iron-autogrow-textarea.git",
   "_target": "2.0-preview",

@@ -30,11 +30,11 @@
     "test-fixture": "custom-elements-v1"
   },
   "homepage": "https://github.com/PolymerElements/iron-flex-layout",
-  "_release": "2ccad6ff22",
+  "_release": "641751dd3e",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "2ccad6ff222265861187de135a26ffac99410189"
+    "commit": "641751dd3e65bb7de69ad457ed0cacbf88ddd5d9"
   },
   "_source": "git://github.com/PolymerElements/iron-flex-layout.git",
   "_target": "2.0-preview",

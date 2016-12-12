@@ -52,11 +52,11 @@
     "iron-flex-layout": "2.0-preview",
     "paper-styles": "2.0-preview"
   },
-  "_release": "b3baa1d137",
+  "_release": "6bf80c2f12",
   "_resolution": {
     "type": "branch",
     "branch": "2.0-preview",
-    "commit": "b3baa1d137429cff85e381900b034a3868b1142f"
+    "commit": "6bf80c2f12bc34d8d24309f8133d2416095769ac"
   },
   "_source": "git://github.com/PolymerElements/paper-behaviors.git",
   "_target": "2.0-preview",
