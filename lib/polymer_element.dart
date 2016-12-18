@@ -40,6 +40,13 @@ class Notify {
 
 const Notify notify = const Notify();
 
+class BowerImport {
+  final String ref;
+  final String import;
+  final String name;
+  const BowerImport({this.ref,this.import,this.name});
+}
+
 
 const _Undefined = const {};
 
@@ -64,6 +71,7 @@ getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 
 @JS('Element')
+@BowerImport(ref:'polymer#2.0-preview',import:"polymer/polymer.html",name:'polymer')
 class PolymerElement extends html.HtmlElement {
   PolymerElement() : super.created() {
   }
