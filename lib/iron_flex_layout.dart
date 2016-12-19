@@ -10,5 +10,6 @@ class _IronFlexLayout extends PolymerElement {
 
 
 @PolymerRegister('iron-flex-layout',template:'src/iron-flex-layout/iron-flex-layout.html',native:true)
+@BowerImport(ref:'PolymerElements/iron-flex-layout#2.0-preview',import:"iron-flex-layout/iron-flex-layout.html",name:'iron-flex-layout')
 class IronFlexLayout /*extends _IronFlexLayout*/ {
 }

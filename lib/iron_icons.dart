@@ -10,5 +10,6 @@ class _IronIcons extends PolymerElement {
 
 
 @PolymerRegister('iron-icons',template:'src/iron-icons/iron-icons.html',native:true)
+@BowerImport(ref:'PolymerElements/iron-icons#2.0-preview',import:"iron-icons/iron-icons.html",name:'iron-icons')
 class IronIcons /*extends _IronIcons*/ {
 }
