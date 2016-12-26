@@ -12,28 +12,30 @@ class _Support {
   external cancelObserver(obj, observer callback);
 }
 
-
-var _observe_support;
-
-Future get whenReady async {
-  if (_observe_support == null) {
-    _observe_support = (await require(['external/polymer_element/observe_support']))
-        .single;
-  }
-  return true;
-}
-
 typedef observer(String propertyName, oldValue, newValue);
 
-/***
- * Makes an observable version of "obj". When properties are changed
- * the callback is called.
- *
- * Calling it on an already observable object returns the same object but
- * adds a listener.
- */
-makeObservable(obj, observer callback) =>
-    _observe_support.makeObservable(obj, callback);
+class ObserveSupport {
+  var _observe_support;
 
-cancelObserver(obj, observer callback) =>
-    _observe_support.cancelObserver(obj, callback);
+  ObserveSupport._(this._observe_support);
+
+  static ObserveSupport _loaded;
+
+  static Future<ObserveSupport> load() async =>
+      _loaded ??
+      (_observe_support) {
+        _loaded = new ObserveSupport._(_observe_support);
+        return _loaded;
+      }((await require(['external/polymer_element/observe_support'])).single);
+
+  /***
+   * Makes an observable version of "obj". When properties are changed
+   * the callback is called.
+   *
+   * Calling it on an already observable object returns the same object but
+   * adds a listener.
+   */
+  makeObservable(obj, observer callback) => _observe_support.makeObservable(obj, callback);
+
+  cancelObserver(obj, observer callback) => _observe_support.cancelObserver(obj, callback);
+}
