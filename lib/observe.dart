@@ -4,6 +4,7 @@ library observe;
 import 'dart:async';
 import 'package:polymer_element/require.dart';
 import 'package:js/js.dart';
+import 'package:js/js_util.dart';
 
 @JS()
 @anonymous
@@ -13,6 +14,8 @@ class _Support {
 }
 
 typedef observer(String propertyName, oldValue, newValue);
+
+Future getMetadata(Type t) async => callMethod((await require(['external/polymer_element/polymerize'])).single,'recoverMetadata',[t]);
 
 class ObserveSupport {
   var _observe_support;
