@@ -69,6 +69,12 @@ Event createCustomEvent(String type,[detail,EventOptions opt = const EventOption
 
 getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
+@JS('Templatizer')
+@BowerImport(ref:'polymer#2.0-preview',import:'polymer/src/templatizer/templatizer.html',name:'polymer')
+abstract class Templatizer {
+  external static flush();
+  external PolymerElement templatize(TemplateElement template,options);
+}
 
 @JS('Element')
 @BowerImport(ref:'polymer#2.0-preview',import:"polymer/polymer.html",name:'polymer')
