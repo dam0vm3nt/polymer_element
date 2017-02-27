@@ -2,8 +2,7 @@
 library polymer_element;
 
 import 'dart:async';
-import 'dart:html' as html;
-import 'dart:html';
+import 'package:html5/html.dart';
 import 'dart:js';
 import 'package:js/js_util.dart';
 import 'package:js/js.dart';
@@ -54,33 +53,40 @@ class EventOptions {
 
   final bool bubbles;
   final bool cancelable;
-  final HtmlElement node;
+  final HTMLElement node;
 
   const EventOptions({this.bubbles:true,this.cancelable:false,this.node});
 }
 
 
 Event createCustomEvent(String type,[detail,EventOptions opt = const EventOptions()]) {
-  Event ev = new CustomEvent(type,canBubble : opt.bubbles,cancelable : opt.cancelable);
-  new JsObject.fromBrowserObject(window).callMethod('_addEventDetail',[ev,detail]);
-  //new JsObject.fromBrowserObject(ev)['detail'] = detail;
+  Event ev = new CustomEvent(type,new CustomEventInit()
+    ..bubbles = opt.bubbles
+    ..cancelable = opt.cancelable
+    ..detail = detail);
   return ev;
 }
 
 getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
+@JS('DomRepeat')
+@BowerImport(ref:'polymer#2.0-preview',import:'polymer/src/data-elements/dom-repeat.html',name:'polymer')
+@PolymerRegister('dom-repeat',native:true)
+abstract class DomRepeat implements PolymerElement {
+  external itemForElement(el);
+  external indexForElement(el);
+}
+
 @JS('Templatizer')
 @BowerImport(ref:'polymer#2.0-preview',import:'polymer/src/templatizer/templatizer.html',name:'polymer')
 abstract class Templatizer {
   external static flush();
-  external PolymerElement templatize(TemplateElement template,options);
+  external PolymerElement templatize(HTMLTemplateElement template,options);
 }
 
 @JS('Element')
 @BowerImport(ref:'polymer#2.0-preview',import:"polymer/polymer.html",name:'polymer')
-class PolymerElement extends html.HtmlElement {
-  PolymerElement() : super.created() {
-  }
+abstract class PolymerElement implements HTMLElement {
 
   external get $;
 
