@@ -2,6 +2,8 @@ name: polymer_element
 author: Vittorio Ballestra <vittorio.ballestra@gmail.com>
 homepage: https://github.com/dam0vm3nt
 description: Polymer-2 support for Dart
+environment:                                                                                                                                                                                                                                    
+    sdk: ">=1.8.0 <2.0.0"            
 
 version: 0.4.0
 dependencies:
