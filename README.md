@@ -1,9 +1,9 @@
 # Polymer 2.0 support for Dart-DDC
 
 This package contains the `polymer 2.0-preview` runtime for projects based on
-[polymerize](https://pub.dartlang.org/packages/polymerize) tool and relate [bazel](http://bazel.io) [rules for polymerize Dart](https://github.com/dam0vm3nt/bazel_polymerize_rules). 
+[polymerize](https://pub.dartlang.org/packages/polymerize) tool and relate [bazel](http://bazel.build) [rules for polymerize Dart](https://github.com/dam0vm3nt/bazel_polymerize_rules). 
 
-To use this package in your bazel polymerize project add the following lines to your `WORKSPACE` file : 
+To use this package in your bazel polymerize project add the following lines to your `WORKSPACE` file :
 
     dart_library(
      name='js',
@@ -20,7 +20,7 @@ To use this package in your bazel polymerize project add the following lines to 
      version='0.1.0')
 
 
-And then in the `BUILD` file of any modules (e.g. `my_module`) that is using it declare a dependency to `@polymer_element//:polymer_element` and `@js//:js`, for example : 
+And then in the `BUILD` file of any modules (e.g. `my_module`) that is using it declare a dependency to `@polymer_element//:polymer_element` and `@js//:js`, for example :
 
     polymer_library(
      name='my_module',
