@@ -70,7 +70,7 @@ Event createCustomEvent(String type,[detail,EventOptions opt = const EventOption
 getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 @JS('DomRepeat')
-@BowerImport(ref:'polymer#2.0-preview',import:'polymer/src/data-elements/dom-repeat.html',name:'polymer')
+@BowerImport(ref:'polymer#2.0-preview',import:'polymer/lib/elements/dom-repeat.html',name:'polymer')
 @PolymerRegister('dom-repeat',native:true)
 abstract class DomRepeat implements PolymerElement {
   external itemForElement(el);
@@ -78,7 +78,7 @@ abstract class DomRepeat implements PolymerElement {
 }
 
 @JS('Templatizer')
-@BowerImport(ref:'polymer#2.0-preview',import:'polymer/src/templatizer/templatizer.html',name:'polymer')
+@BowerImport(ref:'polymer#2.0-preview',import:'polymer/lib/legacy/templatizer-behavior.html',name:'polymer')
 abstract class Templatizer {
   external static flush();
   external PolymerElement templatize(HTMLTemplateElement template,options);
