@@ -1,12 +1,10 @@
 @JS('Polymer')
 library polymer_element;
 
-import 'dart:async';
 import 'package:html5/html.dart';
 import 'dart:js';
-import 'package:js/js_util.dart';
 import 'package:js/js.dart';
-
+import 'package:js/js_util.dart';
 
 class Config {
   List observers;
@@ -19,13 +17,22 @@ class PolymerRegister {
   final String template;
   final bool native;
   final List<Type> uses;
-  const PolymerRegister(this.tagName,{this.template,this.native:false,this.uses});
+  const PolymerRegister(this.tagName,
+      {this.template, this.native: false, this.uses});
+}
+
+/**
+ * Marks a class as a polymer behavior.
+ */
+class PolymerBehavior {
+  final String name;
+  const PolymerBehavior(this.name);
 }
 
 class Define {
   final String tagName;
   final String htmlFile;
-  const Define({this.tagName,this.htmlFile});
+  const Define({this.tagName, this.htmlFile});
 }
 
 class Observe {
@@ -43,51 +50,64 @@ class BowerImport {
   final String ref;
   final String import;
   final String name;
-  const BowerImport({this.ref,this.import,this.name});
+  const BowerImport({this.ref, this.import, this.name});
 }
-
 
 const _Undefined = const {};
 
 class EventOptions {
-
   final bool bubbles;
   final bool cancelable;
   final HTMLElement node;
 
-  const EventOptions({this.bubbles:true,this.cancelable:false,this.node});
+  const EventOptions({this.bubbles: true, this.cancelable: false, this.node});
 }
 
-
-Event createCustomEvent(String type,[detail,EventOptions opt = const EventOptions()]) {
-  Event ev = new CustomEvent(type,new CustomEventInit()
-    ..bubbles = opt.bubbles
-    ..cancelable = opt.cancelable
-    ..detail = detail);
+Event createCustomEvent(String type,
+    [detail, EventOptions opt = const EventOptions()]) {
+  Event ev = new CustomEvent(
+      type,
+      new CustomEventInit()
+        ..bubbles = opt.bubbles
+        ..cancelable = opt.cancelable
+        ..detail = detail);
   return ev;
 }
 
 getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 @JS('DomRepeat')
-@BowerImport(ref:'polymer#2.0-preview',import:'polymer/lib/elements/dom-repeat.html',name:'polymer')
-@PolymerRegister('dom-repeat',native:true)
+@BowerImport(
+    ref: 'polymer#2.0-preview',
+    import: 'polymer/lib/elements/dom-repeat.html',
+    name: 'polymer')
+@PolymerRegister('dom-repeat', native: true)
 abstract class DomRepeat implements PolymerElement {
   external itemForElement(el);
   external indexForElement(el);
 }
 
 @JS('Templatizer')
-@BowerImport(ref:'polymer#2.0-preview',import:'polymer/lib/legacy/templatizer-behavior.html',name:'polymer')
+@BowerImport(
+    ref: 'polymer#2.0-preview',
+    import: 'polymer/lib/legacy/templatizer-behavior.html',
+    name: 'polymer')
 abstract class Templatizer {
   external static flush();
-  external PolymerElement templatize(HTMLTemplateElement template,options);
+  external PolymerElement templatize(HTMLTemplateElement template, options);
 }
 
-@JS('Element')
-@BowerImport(ref:'polymer#2.0-preview',import:"polymer/polymer.html",name:'polymer')
-abstract class PolymerElement implements HTMLElement {
+@JS('MutableDataBehavior')
+@BowerImport(
+    ref: 'polymer#2.0-preview',
+    import: 'polymer/lib/legacy/mutable-data-behavior.html',
+    name: 'polymer')
+abstract class MutableDataBehavior {}
 
+@JS('Element')
+@BowerImport(
+    ref: 'polymer#2.0-preview', import: "polymer/polymer.html", name: 'polymer')
+abstract class PolymerElement implements HTMLElement {
   external get $;
 
   external $$(String selector);
@@ -98,17 +118,58 @@ abstract class PolymerElement implements HTMLElement {
 
   external attributeChangedCallback(name, old, value);
 
-  // Private method can be overridden safely because they become Symbol ...
-  //_invalidateProperties() => _jsObject.callMethod('_invalidateProperties', []);
-
   external set(name, val);
 
-  external notifyPath(name,[val = _Undefined]);
+  external notifyPath(name, [val = _Undefined]);
 
-  external push(path,vals);
+  external push(path, vals);
 
-  external shift(path,vals);
+  external shift(path, vals);
+}
 
-  external splice(path,index,howmany,items);
+class Polymer {
+  static splice(
+          PolymerElement el, String path, int index, int howmany, List items) =>
+      callMethod(
+          el as dynamic, 'splice', [path, index, howmany]..addAll(items));
+}
 
+typedef Reducer(state, ReduxAction action);
+
+class StoreDef {
+  final Reducer reducer;
+  const StoreDef(this.reducer);
+}
+
+@BowerImport(
+    ref: 'polymer-redux#polymer-2',
+    import: "polymer-redux/polymer-redux.html",
+    name: 'polymer-redux')
+abstract class ReduxBehavior {}
+
+class Redux {
+  static dispatch(ReduxBehavior that, String action, List args) =>
+      callMethod(that as dynamic, 'dispatch', <dynamic>[action]..addAll(args));
+}
+
+@JS()
+@anonymous
+class ReduxAction {
+  external String get type;
+  external factory ReduxAction({String type});
+}
+
+class ReduxActionFactory {
+  const ReduxActionFactory();
+}
+
+const ReduxActionFactory reduxActionFactory = const ReduxActionFactory();
+
+class Property {
+  final bool notify;
+  final String computed;
+  final String statePath;
+  final Map extra;
+  const Property(
+      {this.notify: false, this.computed, this.statePath, this.extra});
 }
