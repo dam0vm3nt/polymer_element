@@ -78,7 +78,7 @@ getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 @JS('DomRepeat')
 @BowerImport(
-    ref: 'polymer#2.0-preview',
+    ref: 'polymer#2.0.0-rc.1',
     import: 'polymer/lib/elements/dom-repeat.html',
     name: 'polymer')
 @PolymerRegister('dom-repeat', native: true)
@@ -89,7 +89,7 @@ abstract class DomRepeat implements PolymerElement {
 
 @JS('Templatizer')
 @BowerImport(
-    ref: 'polymer#2.0-preview',
+    ref: 'polymer#2.0.0-rc.1',
     import: 'polymer/lib/legacy/templatizer-behavior.html',
     name: 'polymer')
 abstract class Templatizer {
@@ -99,15 +99,40 @@ abstract class Templatizer {
 
 @JS('MutableDataBehavior')
 @BowerImport(
-    ref: 'polymer#2.0-preview',
+    ref: 'polymer#2.0.0-rc.1',
     import: 'polymer/lib/legacy/mutable-data-behavior.html',
     name: 'polymer')
 abstract class MutableDataBehavior {}
 
+@JS('MutableData')
+@BowerImport(
+    ref: 'polymer#2.0.0-rc.1',
+    import: 'polymer/lib/mixins/mutable-data.html',
+    name: 'polymer')
+abstract class MutableData {}
+
+
+@JS('ElementMixin')
+@BowerImport(
+    ref: 'polymer#2.0.0-rc.1', import: "polymer/lib/mixins/element-mixin.html", name: 'polymer')
+abstract class ElementMixin {
+  external get $;
+
+  external $$(String selector);
+
+  external set(name, val);
+
+  external notifyPath(name, [val = _Undefined]);
+
+  external push(path, vals);
+
+  external shift(path, vals);
+}
+
 @JS('Element')
 @BowerImport(
-    ref: 'polymer#2.0-preview', import: "polymer/polymer.html", name: 'polymer')
-abstract class PolymerElement implements HTMLElement {
+    ref: 'polymer#2.0.0-rc.1', import: "polymer/polymer.html", name: 'polymer')
+abstract class PolymerElement implements HTMLElement, ElementMixin {
   external get $;
 
   external $$(String selector);
@@ -154,14 +179,16 @@ class Redux {
 
 @JS()
 @anonymous
-class ReduxAction {
+class ReduxAction<X> {
   external String get type;
-  external factory ReduxAction({String type});
+  external X get detail;
+  external factory ReduxAction({String type,X detail});
 }
 
 class ReduxActionFactory {
   const ReduxActionFactory();
 }
+
 
 const ReduxActionFactory reduxActionFactory = const ReduxActionFactory();
 
@@ -169,7 +196,8 @@ class Property {
   final bool notify;
   final String computed;
   final String statePath;
+  final Function statePathSelector;
   final Map extra;
   const Property(
-      {this.notify: false, this.computed, this.statePath, this.extra});
+      {this.notify: false, this.computed, this.statePath, this.extra,this.statePathSelector});
 }
