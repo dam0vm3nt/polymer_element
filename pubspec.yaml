@@ -5,7 +5,7 @@ description: Polymer-2 support for Dart
 environment:
     sdk: ">=1.8.0 <2.0.0"
 
-version: 0.5.4
+version: 0.6.0
 dependencies:
   js: any
   html5: ^0.0.4

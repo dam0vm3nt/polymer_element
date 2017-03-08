@@ -24,7 +24,7 @@ Future<List> require(List<String> modules) async {
 
   Completer<List> whenLoaded = new Completer();
 
-  _require(['external/polymer_element/utils'], (utils) {
+  _require(['polymer_element/utils'], (utils) {
     callMethod(utils, 'require_varargs', [
       modules,
       (res) {

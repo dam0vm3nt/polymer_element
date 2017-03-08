@@ -15,7 +15,7 @@ class _Support {
 
 typedef observer(String propertyName, oldValue, newValue);
 
-Future getMetadata(Type t) async => callMethod((await require(['external/polymer_element/polymerize'])).single,'recoverMetadata',[t]);
+Future getMetadata(Type t) async => callMethod((await require(['polymer_element/polymerize'])).single,'recoverMetadata',[t]);
 
 class ObserveSupport {
   var _observe_support;
@@ -29,7 +29,7 @@ class ObserveSupport {
       (_observe_support) {
         _loaded = new ObserveSupport._(_observe_support);
         return _loaded;
-      }((await require(['external/polymer_element/observe_support'])).single);
+      }((await require(['polymer_element/observe_support'])).single);
 
   /***
    * Makes an observable version of "obj". When properties are changed
