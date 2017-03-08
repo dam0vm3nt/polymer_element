@@ -78,7 +78,7 @@ getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 @JS('DomRepeat')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1',
+    ref: 'polymer#2.0.0-rc.2',
     import: 'polymer/lib/elements/dom-repeat.html',
     name: 'polymer')
 @PolymerRegister('dom-repeat', native: true)
@@ -89,7 +89,7 @@ abstract class DomRepeat implements PolymerElement {
 
 @JS('Templatizer')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1',
+    ref: 'polymer#2.0.0-rc.2',
     import: 'polymer/lib/legacy/templatizer-behavior.html',
     name: 'polymer')
 abstract class Templatizer {
@@ -99,28 +99,28 @@ abstract class Templatizer {
 
 @JS('MutableDataBehavior')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1',
+    ref: 'polymer#2.0.0-rc.2',
     import: 'polymer/lib/legacy/mutable-data-behavior.html',
     name: 'polymer')
 abstract class MutableDataBehavior {}
 
 @JS('OptionalMutableDataBehavior')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1',
+    ref: 'polymer#2.0.0-rc.2',
     import: 'polymer/lib/legacy/mutable-data-behavior.html',
     name: 'polymer')
 abstract class OptionalMutableDataBehavior {}
 
 @JS('MutableData')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1',
+    ref: 'polymer#2.0.0-rc.2',
     import: 'polymer/lib/mixins/mutable-data.html',
     name: 'polymer')
 abstract class MutableData {}
 
 @JS('OptionalMutableData')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1',
+    ref: 'polymer#2.0.0-rc.2',
     import: 'polymer/lib/mixins/mutable-data.html',
     name: 'polymer')
 abstract class OptionalMutableData {}
@@ -128,7 +128,7 @@ abstract class OptionalMutableData {}
 
 @JS('ElementMixin')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1', import: "polymer/lib/mixins/element-mixin.html", name: 'polymer')
+    ref: 'polymer#2.0.0-rc.2', import: "polymer/lib/mixins/element-mixin.html", name: 'polymer')
 abstract class ElementMixin {
   external get $;
 
@@ -145,7 +145,7 @@ abstract class ElementMixin {
 
 @JS('Element')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.1', import: "polymer/polymer.html", name: 'polymer')
+    ref: 'polymer#2.0.0-rc.2', import: "polymer/polymer.html", name: 'polymer')
 abstract class PolymerElement implements HTMLElement, ElementMixin {
   external get $;
 
@@ -181,7 +181,7 @@ class StoreDef {
 }
 
 @BowerImport(
-    ref: 'polymer-redux#polymer-2',
+    ref: 'polymer-dart/polymer-redux#polymer-2-collect-props',
     import: "polymer-redux/polymer-redux.html",
     name: 'polymer-redux')
 abstract class ReduxBehavior {}
