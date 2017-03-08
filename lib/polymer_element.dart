@@ -104,12 +104,26 @@ abstract class Templatizer {
     name: 'polymer')
 abstract class MutableDataBehavior {}
 
+@JS('OptionalMutableDataBehavior')
+@BowerImport(
+    ref: 'polymer#2.0.0-rc.1',
+    import: 'polymer/lib/legacy/mutable-data-behavior.html',
+    name: 'polymer')
+abstract class OptionalMutableDataBehavior {}
+
 @JS('MutableData')
 @BowerImport(
     ref: 'polymer#2.0.0-rc.1',
     import: 'polymer/lib/mixins/mutable-data.html',
     name: 'polymer')
 abstract class MutableData {}
+
+@JS('OptionalMutableData')
+@BowerImport(
+    ref: 'polymer#2.0.0-rc.1',
+    import: 'polymer/lib/mixins/mutable-data.html',
+    name: 'polymer')
+abstract class OptionalMutableData {}
 
 
 @JS('ElementMixin')
