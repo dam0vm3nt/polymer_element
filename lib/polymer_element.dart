@@ -77,7 +77,7 @@ getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 @JS('DomRepeat')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/elements/dom-repeat.html',
     name: 'polymer')
 @PolymerRegister('dom-repeat', native: true)
@@ -88,7 +88,7 @@ abstract class DomRepeat implements PolymerElement {
 
 @JS('Templatizer')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/legacy/templatizer-behavior.html',
     name: 'polymer')
 abstract class Templatizer {
@@ -98,7 +98,7 @@ abstract class Templatizer {
 
 @JS('PropertyEffects')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/mixins/property-effects.html',
     name: 'polymer')
 abstract class PropertyEffects {
@@ -132,7 +132,7 @@ abstract class TemplateInstanceBase implements PropertyEffects {
 @JS()
 @anonymous
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/utils/templatize.html',
     name: 'polymer')
 abstract class TemplatizeModule {
@@ -150,35 +150,35 @@ external TemplatizeModule get Templatize;
  */
 @JS('MutableDataBehavior')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/legacy/mutable-data-behavior.html',
     name: 'polymer')
 abstract class MutableDataBehavior {}
 
 @JS('OptionalMutableDataBehavior')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/legacy/mutable-data-behavior.html',
     name: 'polymer')
 abstract class OptionalMutableDataBehavior {}
 
 @JS('MutableData')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/mixins/mutable-data.html',
     name: 'polymer')
 abstract class MutableData {}
 
 @JS('OptionalMutableData')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: 'polymer/lib/mixins/mutable-data.html',
     name: 'polymer')
 abstract class OptionalMutableData {}
 
 @JS('ElementMixin')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2',
+    ref: 'polymer#2.0.0-rc.6',
     import: "polymer/lib/mixins/element-mixin.html",
     name: 'polymer')
 abstract class ElementMixin implements PropertyEffects {
@@ -189,7 +189,7 @@ abstract class ElementMixin implements PropertyEffects {
 
 @JS('Element')
 @BowerImport(
-    ref: 'polymer#2.0.0-rc.2', import: "polymer/polymer.html", name: 'polymer')
+    ref: 'polymer#2.0.0-rc.6', import: "polymer/polymer.html", name: 'polymer')
 abstract class PolymerElement implements HTMLElement, ElementMixin {
   external get $;
 
