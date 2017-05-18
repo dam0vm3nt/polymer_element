@@ -6,8 +6,10 @@ import 'dart:js';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 export 'super.dart' show callSuper;
+// ignore: UNUSED_IMPORT
+import 'package:polymer_element/polymerize.dart';
 
-const String POLYMER_VERSION = "2.0.0-rc.7";
+const String POLYMER_VERSION = "2.0.0";
 
 class Config {
   List observers;
