@@ -11,9 +11,9 @@ import 'package:html5/html.dart';
 @JS()
 @anonymous
 class ReduxInfo {
-  external String get module;
+  external Function get reducer;
 
-  external factory ReduxInfo({String module});
+  external factory ReduxInfo({Function reducer});
 }
 
 @JS()
@@ -58,7 +58,7 @@ config({Map<String, Property> properties, List<String> actions, List<String> obs
     observers: observers, //
     reduxActions: reduxActions, //
     behaviors: behaviors, //
-    reduxInfo: new ReduxInfo());
+    reduxInfo: reduxInfo);
 
 summary() => new Summary();
 
