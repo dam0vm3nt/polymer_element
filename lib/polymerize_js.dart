@@ -33,8 +33,15 @@ class Config {
 @anonymous
 class Property {
   external bool get notify;
+  external factory Property({bool notify});
+}
+
+@JS()
+@anonymous
+class ReduxProperty {
+  external bool get notify;
   external String get statePath;
-  external factory Property({bool notify, String statePath});
+  external factory ReduxProperty({bool notify, String statePath});
 }
 
 @JS()
@@ -52,13 +59,8 @@ class Summary {
 @JS()
 external register([Type type, String tag, Config config, Summary summary, bool native, String templateUrl]);
 
-config({Map<String, Property> properties, List<String> actions, List<String> observers, List<String> reduxActions, List<String> behaviors, ReduxInfo reduxInfo}) => new Config(
-    properties: properties, //
-    actions: actions, //
-    observers: observers, //
-    reduxActions: reduxActions, //
-    behaviors: behaviors, //
-    reduxInfo: reduxInfo);
+@JS()
+external defineBehavior([String behaviorName, Type dartClass, Config config]);
 
 summary() => new Summary();
 
