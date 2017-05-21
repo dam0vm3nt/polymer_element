@@ -9,7 +9,8 @@ export 'super.dart' show callSuper;
 // ignore: UNUSED_IMPORT
 import 'package:polymer_element/polymerize_js.dart';
 
-const String POLYMER_VERSION = "2.0.0";
+const String POLYMER_VERSION = "v2.0.0";
+const String WEB_COMPONENTS = "v1.0.0";
 
 class Config {
   List observers;
