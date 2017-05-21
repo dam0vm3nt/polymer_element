@@ -241,7 +241,7 @@ class StoreDef {
 }
 
 @BowerImport(
-    ref: 'polymer-dart/polymer-redux#polymer-2-collect-props',
+    ref: 'polymer-dart/polymer-redux#v2.0.0',
     import: "polymer-redux/polymer-redux.html",
     name: 'polymer-redux')
 abstract class ReduxBehavior {}
