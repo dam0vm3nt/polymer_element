@@ -23,10 +23,10 @@ class Config {
   external List<String> get actions;
   external List<String> get observers;
   external List<String> get reduxActions;
-  external List<String> get behaviors;
+  external List get behaviors;
   external ReduxInfo get reduxInfo;
 
-  external factory Config({properties, List<String> actions, List<String> observers, List<String> reduxActions, List<String> behaviors, ReduxInfo reduxInfo});
+  external factory Config({properties, List<String> actions, List<String> observers, List<String> reduxActions, List behaviors, ReduxInfo reduxInfo});
 }
 
 @JS()
@@ -58,6 +58,9 @@ class Summary {
 
 @JS()
 external register([Type type, String tag, Config config, Summary summary, bool native, String templateUrl]);
+
+@JS()
+external resolveJsObject(String path);
 
 @JS()
 external defineBehavior([String behaviorName, Type dartClass, Config config]);

@@ -209,6 +209,8 @@ abstract class PolymerElement implements HTMLElement, ElementMixin {
 
   external $$(String selector);
 
+  external ready();
+
   external connectedCallback();
 
   external disconnectedCallback();
