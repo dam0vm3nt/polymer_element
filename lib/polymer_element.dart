@@ -239,7 +239,8 @@ typedef Reducer(state, ReduxAction action);
 
 class StoreDef {
   final Reducer reducer;
-  const StoreDef(this.reducer);
+  final bool local;
+  const StoreDef(this.reducer,{this.local:false});
 }
 
 @BowerImport(

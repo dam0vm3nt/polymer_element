@@ -12,8 +12,9 @@ import 'package:html5/html.dart';
 @anonymous
 class ReduxInfo {
   external Function get reducer;
+  external bool get local;
 
-  external factory ReduxInfo({Function reducer});
+  external factory ReduxInfo({Function reducer,bool local});
 }
 
 @JS()
@@ -64,6 +65,9 @@ external resolveJsObject(String path);
 
 @JS()
 external defineBehavior([String behaviorName, Type dartClass, Config config]);
+
+@JS('Redux.createStore')
+external createStore(Function reducer);
 
 summary() => new Summary();
 
