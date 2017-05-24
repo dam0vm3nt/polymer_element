@@ -218,6 +218,7 @@ abstract class PolymerElement implements HTMLElement, ElementMixin {
   external attributeChangedCallback(name, old, value);
 }
 
+
 /**
  * Unfortunately JS-INTEROP doesn't allows for varargs or
  * more complex method mapping, so we have to provide those
@@ -234,42 +235,6 @@ class PropertyEffectsUtils {
   static push(PropertyEffects el, String path, [items]) =>
       callMethod(el as dynamic, 'push', [path]..addAll(items));
 }
-
-typedef Reducer(state, ReduxAction action);
-
-class StoreDef {
-  final Reducer reducer;
-  final bool local;
-  const StoreDef(this.reducer,{this.local:false});
-}
-
-@BowerImport(
-    ref: 'polymer-dart/polymer-redux#v2.0.0',
-    import: "polymer-redux/polymer-redux.html",
-    name: 'polymer-redux')
-abstract class ReduxBehavior {}
-
-class Redux {
-  static dispatch(ReduxBehavior that, String action, List args) =>
-      callMethod(that as dynamic, 'dispatch', <dynamic>[action]..addAll(args));
-}
-
-@JS()
-@anonymous
-class ReduxAction<X> {
-  external String get type;
-  external X get detail;
-  external factory ReduxAction({String type, X detail});
-}
-
-class ReduxActionFactory {
-  const ReduxActionFactory();
-}
-
-const ReduxActionFactory reduxActionFactory = const ReduxActionFactory();
-
-
-
 
 /**
  * Optional property annotation in order to add metadata info.
