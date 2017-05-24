@@ -5,9 +5,9 @@ description: Polymer-2 support for Dart
 environment:
     sdk: ">=1.8.0 <2.0.0"
 
-version: 2.0.0+rc.11
+version: 2.0.0+rc.12
 dependencies:
   js: any
-  html5: ^0.0.5
+  html5: ^0.0.6
   polymerize_common: ^1.0.0
 #   path: /home/vittorio/Develop/dart/polymerize_common
