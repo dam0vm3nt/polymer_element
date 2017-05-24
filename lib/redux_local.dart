@@ -25,9 +25,9 @@ const ReduxActionFactory reduxActionFactory = const ReduxActionFactory();
 
 
 @BowerImport(
-    ref: 'polymer-dart/polymer-redux#local-redux-3',
-    import: "polymer-redux-local/polymer-redux-local.html",
-    name: 'polymer-redux-local')
+    ref: 'polymer-dart/polymer-redux#v2.0.1',
+    import: "polymer-redux/polymer-redux-local.html",
+    name: 'polymer-redux')
 @JS("PolymerReduxLocal")
 abstract class ReduxLocalBehavior {
   external get store;
