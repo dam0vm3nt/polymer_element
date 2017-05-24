@@ -71,6 +71,9 @@ external createStore(Function reducer);
 
 summary() => new Summary();
 
+@JS()
+external importNative(String tagName,List<String> className);
+
 //createMap(Map<String, dynamic> m) => m ; // u.jsify(m);
 /*{
 
