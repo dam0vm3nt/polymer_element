@@ -10,28 +10,10 @@ import 'package:html5/html.dart';
 @JS('require')
 external _require(List modules, Function body);
 
+Future requireOne(String module) async => (await require([module])).single;
+
 Future<List> require(List<String> modules) async {
-  // Load all html imports
-  await Future.wait(modules.map((module) {
-    HTMLLinkElement lnk = (document.createElement('link') as HTMLLinkElement)
-      ..rel = 'import'
-      ..href = "${module}.html";
-    document.querySelector('head').append(lnk);
-    Completer completer = new Completer();
-    lnk.onload = (ev)=>completer.complete();
-    return completer.future;
-  }));
-
-  Completer<List> whenLoaded = new Completer();
-
-  _require(['polymer_element/utils'], (utils) {
-    callMethod(utils, 'require_varargs', [
-      modules,
-      (res) {
-        whenLoaded.complete(res);
-      }
-    ]);
-  });
-
-  return whenLoaded.future;
+  List result = [];
+  modules.forEach((m) => _require([m], (x) => result.add(x)));
+  return result;
 }
