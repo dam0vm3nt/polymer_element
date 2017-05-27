@@ -18,6 +18,7 @@ import 'package:polymerize_common/html_import.dart';
 class _Support {
   external makeObservable(obj, observer callback);
   external cancelObserver(obj, observer callback);
+  external List<String> findProps(obj);
 }
 
 typedef observer(String propertyName, oldValue, newValue);
@@ -46,6 +47,8 @@ class ObserveSupport {
   makeObservable(obj, observer callback) => _observe_support.makeObservable(obj, callback);
 
   cancelObserver(obj, observer callback) => _observe_support.cancelObserver(obj, callback);
+
+  List<String> findProps(obj) => _observe_support.findProps(obj);
 }
 
 ObserveSupport observeSupport;
@@ -68,20 +71,138 @@ class _JSObject {
 
 @PolymerBehavior('Polymerize.AutonotifyBehavior')
 abstract class AutonotifyBehavior implements DartCallbacksBehavior, PropertyObserverBehavior {
-  PropertyChangeHandler _rootHandler;
+  //PropertyChangeHandler _rootHandler;
+  Set<String> _topLevelProps;
+  Observer _mainObserver;
+  Notifier _mainNotifier;
   void readyPreHook() {
     String tagName = (this as HTMLElement).tagName;
     Metadata data = metadataRegistry[tagName];
 
     // Need to observe only the top level names of nested props
-    _rootHandler = new PropertyChangeHandler.root(this as PolymerElement);
+    //_rootHandler = new PropertyChangeHandler.root(this as PolymerElement);
+    _topLevelProps = new Set.from(data.observedPaths.map((p) => p.split('.').first));
   }
 
   void onPropertiesChangedPreHook(data, changedProps, oldData) {
-    _rootHandler.current = data;
+    if (_mainObserver == null) {
+      _mainObserver = new Observer();
+      _mainNotifier = new Notifier(data, "", (prop) => onNotify(prop), _mainObserver, filter: _topLevelProps);
+    }
+
     JSObject.keys(changedProps).forEach((propName) {
-      _rootHandler(propName, getProperty(oldData, propName), getProperty(data, propName));
+      var oldv = getProperty(oldData, propName);
+      var newv = getProperty(data, propName);
+      if (oldv != newv) {
+        _mainObserver(propName, oldv, newv);
+      }
     });
+  }
+
+  void onNotify(String propName) {
+    // Filter on top level listened props
+
+    (this as PolymerElement).notifyPath(propName);
+  }
+}
+
+typedef void Notify(String path);
+
+class Change {
+  String property;
+  var oldValue;
+  var newValue;
+
+  Change(this.property, this.oldValue, this.newValue);
+}
+
+class Observer {
+  StreamController<Change> _consumer = new StreamController.broadcast();
+  Stream<Change> get changes => _consumer.stream;
+
+  void call(propName, oldv, newv) {
+    _consumer.add(new Change(propName, oldv, newv));
+  }
+}
+
+class Notifier {
+  String _path;
+  Notify _notify;
+  Observer _observer;
+  var _obj;
+  Map<String, Notifier> _childObservers = {};
+
+  Notifier._(this._obj, this._path, this._notify, this._observer) {}
+
+  factory Notifier(_obj, String _path, Notify _notify, Observer _observer, {Set<String> filter,Set examined}) {
+    // TODO : CONVERTIRE IN FACTORY ED EVITARE I LOOP RICORSIVI
+    if (examined == null) {
+      examined = new Set();
+    }
+
+    if (examined.contains(_obj)) {
+      return null;
+    }
+
+    examined.add(_obj);
+
+    Notifier n = new Notifier._(_obj, _path, _notify, _observer);
+    List<String> props = observeSupport.findProps(_obj);
+    print("FOUND ${props} in ${_obj}");
+    props.forEach((name) {
+      if (filter != null && !filter.contains(name)) return;
+      var val = getProperty(_obj, name);
+      if (val != null) {
+        n._observeProp(val, name,examined);
+      }
+    });
+
+    examined.remove(_obj);
+
+    // Add listeners
+    _observer.changes.listen(n._onChange);
+
+    return n;
+  }
+
+  void _observeProp(val, String name,[Set examined]) {
+    Observer obs = new Observer();
+    var obsVal = observeSupport.makeObservable(val, obs);
+    if (obsVal != null) {
+      Notifier forProp = new Notifier(val, "${_path}${name}.", _notify, obs,examined: examined);
+      setProperty(_obj, name, obsVal);
+      _childObservers[name] = forProp;
+    }
+  }
+
+  void close() {
+    _childObservers.forEach((String prop, Notifier not) {
+      not.close();
+    });
+    _childObservers.clear();
+    // Stop observing
+    observeSupport.cancelObserver(_obj, _observer);
+
+    // clear refs
+    _observer = null;
+    _obj = null;
+    _notify = null;
+    _path = null;
+  }
+
+  void _onChange(Change chg) {
+    // Remove prev listener
+    Notifier _prev = _childObservers.remove(chg.property);
+    if (_prev != null) {
+      _prev.close();
+    }
+
+    if (chg.newValue != null) {
+      _observeProp(chg.newValue, chg.property);
+    }
+
+    // Notify
+    _notify("${_path}${chg.property}");
   }
 }
 
@@ -105,7 +226,7 @@ class PropertyChangeHandler {
 
   void install(parent) {
     this.parent = parent;
-    if (_propName!=null && _subPropertyHandlers.isNotEmpty) {
+    if (_propName != null && _subPropertyHandlers.isNotEmpty) {
       current = getProperty(parent, _propName);
 
       if (current != null) {
