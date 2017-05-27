@@ -82,13 +82,12 @@ abstract class AutonotifyBehavior implements DartCallbacksBehavior, PropertyObse
     // Need to observe only the top level names of nested props
     //_rootHandler = new PropertyChangeHandler.root(this as PolymerElement);
     _topLevelProps = new Set.from(data.observedPaths.map((p) => p.split('.').first));
+    _mainObserver = new Observer();
+    _mainNotifier = new Notifier(this, "", (prop) => onNotify(prop), _mainObserver, filter: _topLevelProps);
+
   }
 
   void onPropertiesChangedPreHook(data, changedProps, oldData) {
-    if (_mainObserver == null) {
-      _mainObserver = new Observer();
-      _mainNotifier = new Notifier(data, "", (prop) => onNotify(prop), _mainObserver, filter: _topLevelProps);
-    }
 
     JSObject.keys(changedProps).forEach((propName) {
       var oldv = getProperty(oldData, propName);
