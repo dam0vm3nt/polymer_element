@@ -105,7 +105,7 @@ class PropertyChangeHandler {
 
   void install(parent) {
     this.parent = parent;
-    if (_propPath.isNotEmpty && _subPropertyHandlers.isNotEmpty) {
+    if (_propName!=null && _subPropertyHandlers.isNotEmpty) {
       current = getProperty(parent, _propName);
 
       if (current != null) {
@@ -145,7 +145,7 @@ class PropertyChangeHandler {
 
     PropertyChangeHandler handler = new PropertyChangeHandler()
       .._target = target
-      .._propPath = ""
+      .._propPath = null
       .._propName = null
       .._notify = false
       .._subPropertyHandlers = createHandlerTree(target, data.observedPaths.map((x) => x.split('.')), notify: false);
