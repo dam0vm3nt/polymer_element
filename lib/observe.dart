@@ -92,10 +92,7 @@ abstract class AutonotifyBehavior implements DartCallbacksBehavior, PropertyObse
     JSObject.keys(changedProps).forEach((propName) {
       var oldv = getProperty(oldData, propName);
       var newv = getProperty(data, propName);
-      var pxy = observeSupport.makeObservable(newv);
-      if (newv!=pxy) {
-        new Future(() => setProperty(data, propName, pxy)); // schedule replace
-      }
+
       if (oldv != newv) {
         _mainNotifier.onChange(propName, oldv, newv);
       }
@@ -146,18 +143,22 @@ class Notifier {
     _path = null;
   }
 
-  void onChange(String propName, oldv, newv) {
+  onChange(String propName, oldv, newv) {
     // Remove prev listener
     Notifier _prev = _childObservers.remove(propName);
     if (_prev != null) {
       _prev.close();
     }
 
+    var p = newv;
     if (newv != null) {
-      CallbackFactoryResult res = this(propName, newv);
-      var pxy= observeSupport.makeObservable(newv, callback: res.callback, factory: res.factory);
-      if (pxy!=newv && pxy!=null) {
-        new Future(()=>setProperty(_obj, propName, pxy));
+      p = observeSupport.makeObservable(newv);
+      if (p!=null) {
+        CallbackFactoryResult res = this(propName, newv);
+        var pxy = observeSupport.makeObservable(newv, callback: res.callback, factory: res.factory);
+        if (pxy != newv && pxy != null) {
+          new Future(() => setProperty(_obj, propName, pxy));
+        }
       }
     }
 
@@ -169,5 +170,7 @@ class Notifier {
     if (_obj is List) {
       _notify("${_path}length");
     }
+
+    return p;
   }
 }
