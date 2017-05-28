@@ -44,7 +44,7 @@ class ObserveSupport {
    * Calling it on an already observable object returns the same object but
    * adds a listener.
    */
-  makeObservable(obj, observer callback) => _observe_support.makeObservable(obj, callback);
+  X makeObservable<X>(X obj, [observer callback]) => _observe_support.makeObservable(obj, callback);
 
   cancelObserver(obj, observer callback) => _observe_support.cancelObserver(obj, callback);
 
@@ -169,7 +169,9 @@ class Notifier {
     var obsVal = observeSupport.makeObservable(val, obs);
     if (obsVal != null) {
       Notifier forProp = new Notifier(val, "${_path}${name}.", _notify, obs,examined: examined);
-      setProperty(_obj, name, obsVal);
+      if (obsVal!=val) {
+        setProperty(_obj, name, obsVal);
+      }
       _childObservers[name] = forProp;
     }
   }
@@ -202,6 +204,12 @@ class Notifier {
 
     // Notify
     _notify("${_path}${chg.property}");
+
+    // If list notify length too
+    // (investigate on why it doesn't get notified automatically)
+    if (_obj is List) {
+      _notify("${_path}length");
+    }
   }
 }
 
