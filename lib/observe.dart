@@ -112,25 +112,26 @@ class Notifier {
   String _path;
   Notify _notify;
   var _obj;
-  observer _observer;
+  observer _callback;
+  callbackFactory _factory;
 
   Notifier(this._obj, this._path, this._notify) {
-    _observer = (String propName, oldv, newv) {
-      notify(propName);
+    _callback = (String propName, oldv, newv) {
+      _notify("${_path}${propName}");
     };
+
+    _factory = (String property, value) => new Notifier(null, "${_path}${property}.", _notify)._asResult();
+
   }
 
-  CallbackFactoryResult call(String property, value) {
-    Notifier notifier = new Notifier(value, "${_path}${property}.", _notify);
-    return new CallbackFactoryResult(callback: notifier._observer, factory: notifier);
-  }
+  CallbackFactoryResult _asResult() => new CallbackFactoryResult(callback: _callback,factory: _factory);
 
   void uninstall(String propName, oldv) {
     if (oldv != null) {
       var pxy = observeSupport.makeObservable(oldv);
       CallbackFactoryResult res = _topLevel.remove(propName);
       if (pxy != null && res != null) {
-        observeSupport.cancelObserver(oldv, res.callback, res.factory);
+        observeSupport.cancelObserver(pxy, res.callback, res.factory);
       }
     }
   }
@@ -143,29 +144,19 @@ class Notifier {
     if (newv != null) {
       p = observeSupport.makeObservable(newv);
       if (p != null) {
-        CallbackFactoryResult res = this(propName, newv);
+        CallbackFactoryResult res = _factory(propName, newv);
         _topLevel[propName] = res;
         observeSupport.makeObservable(newv, callback: res.callback, factory: res.factory);
 
-        // When new replace
+        // When new replace (autoinstall option)
         if (p != newv) {
           new Future(() => setProperty(_obj, propName, p));
         }
       }
     }
 
-    //notify(propName);
-  }
-
-  void notify(String propName) {
-    // Notify
-    _notify("${_path}${propName}");
-
-    // If list notify length too
-    // (investigate on why it doesn't get notified automatically)
-    if (_obj is List) {
-      _notify("${_path}length");
-    }
+    // NOTE : there's no need to notify first level props...
+    //_callback(propName);
   }
 }
 
