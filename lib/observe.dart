@@ -124,7 +124,6 @@ class Notifier {
   CallbackFactoryResult call(String property, value) {
     Notifier notifier = new Notifier(value, "${_path}${property}.", _notify);
     _childObservers[property] = notifier;
-
     return new CallbackFactoryResult(callback: notifier._observer, factory: notifier);
   }
 
@@ -134,8 +133,10 @@ class Notifier {
     });
     _childObservers.clear();
     // Stop observing
-    observeSupport.cancelObserver(observeSupport.makeObservable(_obj), _observer, this);
-
+    var pxy = observeSupport.makeObservable(_obj);
+    if (pxy != null) {
+      observeSupport.cancelObserver(pxy, _observer, this);
+    }
     // clear refs
 
     _obj = null;
@@ -153,7 +154,7 @@ class Notifier {
     var p = newv;
     if (newv != null) {
       p = observeSupport.makeObservable(newv);
-      if (p!=null) {
+      if (p != null) {
         CallbackFactoryResult res = this(propName, newv);
         var pxy = observeSupport.makeObservable(newv, callback: res.callback, factory: res.factory);
         if (pxy != newv && pxy != null) {
