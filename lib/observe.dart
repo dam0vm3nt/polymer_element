@@ -82,7 +82,7 @@ class _JSObject {
 @PolymerBehavior('Polymerize.AutonotifyBehavior')
 abstract class AutonotifyBehavior implements DartCallbacksBehavior, PropertyObserverBehavior {
   //PropertyChangeHandler _rootHandler;
-  Set<String> _topLevelProps;
+  //Set<String> _topLevelProps;
   Notifier _mainNotifier;
   void readyPreHook() {
     _mainNotifier = new Notifier(this, "", (prop) => onNotify(prop));
@@ -94,7 +94,7 @@ abstract class AutonotifyBehavior implements DartCallbacksBehavior, PropertyObse
       var newv = getProperty(data, propName);
 
       if (oldv != newv) {
-        _mainNotifier.onChange(propName, oldv, newv);
+        _mainNotifier.install(propName, oldv, newv);
       }
     });
   }
@@ -112,57 +112,52 @@ class Notifier {
   String _path;
   Notify _notify;
   var _obj;
-  Map<String, Notifier> _childObservers = {};
   observer _observer;
 
   Notifier(this._obj, this._path, this._notify) {
     _observer = (String propName, oldv, newv) {
-      onChange(propName, oldv, newv);
+      notify(propName);
     };
   }
 
   CallbackFactoryResult call(String property, value) {
     Notifier notifier = new Notifier(value, "${_path}${property}.", _notify);
-    _childObservers[property] = notifier;
     return new CallbackFactoryResult(callback: notifier._observer, factory: notifier);
   }
 
-  void close() {
-    _childObservers.forEach((String prop, Notifier not) {
-      not.close();
-    });
-    _childObservers.clear();
-    // Stop observing
-    var pxy = observeSupport.makeObservable(_obj);
-    if (pxy != null) {
-      observeSupport.cancelObserver(pxy, _observer, this);
+  void uninstall(String propName, oldv) {
+    if (oldv != null) {
+      var pxy = observeSupport.makeObservable(oldv);
+      CallbackFactoryResult res = _topLevel.remove(propName);
+      if (pxy != null && res != null) {
+        observeSupport.cancelObserver(oldv, res.callback, res.factory);
+      }
     }
-    // clear refs
-
-    _obj = null;
-    _notify = null;
-    _path = null;
   }
 
-  onChange(String propName, oldv, newv) {
-    // Remove prev listener
-    Notifier _prev = _childObservers.remove(propName);
-    if (_prev != null) {
-      _prev.close();
-    }
+  Map<String, CallbackFactoryResult> _topLevel = {};
 
+  void install(String propName, oldv, newv) {
+    uninstall(propName, oldv);
     var p = newv;
     if (newv != null) {
       p = observeSupport.makeObservable(newv);
       if (p != null) {
         CallbackFactoryResult res = this(propName, newv);
-        var pxy = observeSupport.makeObservable(newv, callback: res.callback, factory: res.factory);
-        if (pxy != newv && pxy != null) {
-          new Future(() => setProperty(_obj, propName, pxy));
+        _topLevel[propName] = res;
+        observeSupport.makeObservable(newv, callback: res.callback, factory: res.factory);
+
+        // When new replace
+        if (p != newv) {
+          new Future(() => setProperty(_obj, propName, p));
         }
       }
     }
 
+    //notify(propName);
+  }
+
+  void notify(String propName) {
     // Notify
     _notify("${_path}${propName}");
 
@@ -171,7 +166,7 @@ class Notifier {
     if (_obj is List) {
       _notify("${_path}length");
     }
-
-    return p;
   }
 }
+
+toObservable(obj) => observeSupport.makeObservable(obj);
