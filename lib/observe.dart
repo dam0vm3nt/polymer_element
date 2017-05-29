@@ -40,9 +40,9 @@ class ObserveSupport {
 
   static ObserveSupport _loaded;
 
-  static Future<ObserveSupport> load() =>
+  static Future<ObserveSupport> load() async =>
       _loaded ??
-      requireOne('polymer_element/observe_support').then((_observe_support) {
+      await requireOne('polymer_element/observe_support').then((_observe_support) {
         _loaded = new ObserveSupport._(_observe_support);
         return _loaded;
       });
