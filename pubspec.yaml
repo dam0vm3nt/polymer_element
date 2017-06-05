@@ -10,9 +10,12 @@ dependencies:
   js: any
   html5: ^0.0.6
   polymerize_common: ^1.0.0
-#   path: /home/vittorio/Develop/dart/polymerize_common
 dev_dependencies:
   polymerize:
    path: ../polymerize
 transformers:
  - polymerize
+dependency_overrides:
+  polymerize_common:
+   path: /home/vittorio/Develop/dart/polymerize_common
+

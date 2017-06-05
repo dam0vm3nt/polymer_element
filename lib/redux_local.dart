@@ -1,8 +1,10 @@
 @JS()
+@HtmlImport('polymer-redux.html')
 library polymer_element.redux_local;
 
 import 'package:js/js.dart';
 import 'package:polymer_element/polymer_element.dart';
+import 'package:polymerize_common/html_import.dart';
 
 
 typedef Reducer(state, ReduxAction action);

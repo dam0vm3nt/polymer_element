@@ -1,4 +1,5 @@
 @JS('Polymerize')
+@JsMap('external/polymer_element/src/js/polymerize')
 @HtmlImport('polymerize_js.html')
 library polymerize.init;
 
@@ -7,6 +8,8 @@ import 'package:js/js_util.dart' as u;
 import 'package:polymerize_common/html_import.dart';
 // ignore: UNUSED_IMPORT
 import 'package:html5/html.dart';
+import 'package:polymer_element/native_polymerize.dart';
+import 'package:polymerize_common/map.dart';
 
 @JS()
 @anonymous
