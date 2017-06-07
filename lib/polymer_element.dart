@@ -8,22 +8,13 @@ import 'package:js/js_util.dart';
 export 'super.dart' show callSuper;
 export 'package:polymer_element/annotations.dart';
 import 'package:polymer_element/annotations.dart';
-// ignore: UNUSED_IMPORT
-import 'package:polymer_element/polymerize_js.dart';
+
 // ignore: UNUSED_IMPORT
 import 'metadata_registry.dart';
-import 'package:polymerize_common/init.dart';
 export 'metadata_registry.dart';
 
 const String POLYMER_VERSION = "v2.0.0";
 const String WEB_COMPONENTS = "v1.0.0";
-
-class Config {
-  List observers;
-
-  Config({this.observers});
-}
-
 
 
 const _Undefined = const {};
