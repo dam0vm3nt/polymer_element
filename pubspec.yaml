@@ -18,4 +18,6 @@ transformers:
 dependency_overrides:
   polymerize_common:
    path: /home/vittorio/Develop/dart/polymerize_common
+  html5:
+   path: ../html_lib
 

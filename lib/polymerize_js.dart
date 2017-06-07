@@ -1,7 +1,5 @@
 @JS('Polymerize')
 @JsMap('packages/polymer_element/src/js/polymerize')
-@BowerImport(ref: POLYMER_VERSION, import: "polymer/polymer.html", name: 'polymer')
-@BowerImport(ref: POLYMER_VERSION, import: 'polymer/lib/mixins/mutable-data.html', name: 'polymer')
 library polymerize.init;
 
 import 'package:js/js.dart';
@@ -10,8 +8,7 @@ import 'package:js/js.dart';
 import 'package:html5/html.dart';
 import 'package:polymerize_common/init.dart';
 import 'package:polymerize_common/map.dart';
-// ignore: UNUSED_IMPORT
-import 'package:polymer_element/polymer_element.dart';
+
 
 @JS()
 @anonymous
@@ -37,9 +34,9 @@ class Config {
 
 @JS()
 @anonymous
-class Property {
+class PolymerProperty {
   external bool get notify;
-  external factory Property({bool notify});
+  external factory PolymerProperty({bool notify});
 }
 
 @JS()
@@ -79,13 +76,18 @@ summary() => new Summary();
 @JS()
 external importNative(String tagName, List<String> className);
 
-bool isLoaded = false;
+bool _isLoaded = false;
 @initModule
 void setLoaded() {
   // Todo : generate code that checks if this is true (same for html)
   // this is needed in order to guarantee that those modules get included
   // otherwise pure native modules will not be loaded by default.
-  isLoaded = true;
+  _isLoaded = true;
+}
+
+void checkPolymerizeJsIsLoaded() {
+  if (!_isLoaded)
+    throw "Polymerize JS is not ready";
 }
 
 //createMap(Map<String, dynamic> m) => m ; // u.jsify(m);

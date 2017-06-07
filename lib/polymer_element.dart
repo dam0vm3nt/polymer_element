@@ -8,10 +8,17 @@ import 'package:js/js_util.dart';
 export 'super.dart' show callSuper;
 export 'package:polymer_element/annotations.dart';
 import 'package:polymer_element/annotations.dart';
+export 'package:js/js.dart';
+export 'package:js/js_util.dart';
+
 
 // ignore: UNUSED_IMPORT
 import 'metadata_registry.dart';
+import 'package:polymer_element/polymerize_js.dart' as pol show importNative,checkPolymerizeJsIsLoaded;
+export 'package:polymer_element/polymerize_js.dart';
+import 'package:polymerize_common/init.dart';
 export 'metadata_registry.dart';
+
 
 const String POLYMER_VERSION = "v2.0.0";
 const String WEB_COMPONENTS = "v1.0.0";
@@ -194,4 +201,18 @@ class PropertyEffectsUtils {
 
   static push(PropertyEffects el, String path, [items]) =>
       callMethod(el as dynamic, 'push', [path]..addAll(items));
+}
+
+//@init
+void ensurePolymerJsIsLoaded() {
+  pol.checkPolymerizeJsIsLoaded();
+  checkHtml5();
+}
+
+@initModule
+generatedInitModule() {
+  ensurePolymerJsIsLoaded();
+  pol.importNative('dom-repeat', ['Polymer', 'DomRepeat']);
+  pol.importNative('dom-if', ['Polymer', 'DomIf']);
+  return;
 }
