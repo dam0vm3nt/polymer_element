@@ -133,7 +133,7 @@ class Notifier {
 
         // When new replace (autoinstall option)
         if (p != newv) {
-          window.setTimeout(([_])=>setProperty(_obj, propName, p),0);
+          window.setTimeout(([_])=>setProperty(_obj, propName, p));
         }
       }
     }
