@@ -14,9 +14,10 @@ export 'package:js/js_util.dart';
 
 // ignore: UNUSED_IMPORT
 import 'metadata_registry.dart';
-import 'package:polymer_element/polymerize_js.dart'  show importNative,checkPolymerizeJsIsLoaded;
+import 'package:polymer_element/polymerize_js.dart' ;
 export 'package:polymer_element/polymerize_js.dart';
 import 'package:polymerize_common/init.dart';
+export 'package:polymerize_common/init.dart';
 export 'metadata_registry.dart';
 
 
@@ -201,10 +202,4 @@ class PropertyEffectsUtils {
 
   static push(PropertyEffects el, String path, [items]) =>
       callMethod(el as dynamic, 'push', [path]..addAll(items));
-}
-
-@init
-void ensurePolymerJsIsLoaded() {
-  checkPolymerizeJsIsLoaded();
-  checkHtml5();
 }

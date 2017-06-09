@@ -75,25 +75,3 @@ summary() => new Summary();
 
 @JS()
 external importNative(String tagName, List<String> className);
-
-bool _isLoaded = false;
-@initModule
-void setLoaded() {
-  // Todo : generate code that checks if this is true (same for html)
-  // this is needed in order to guarantee that those modules get included
-  // otherwise pure native modules will not be loaded by default.
-  _isLoaded = true;
-}
-
-void checkPolymerizeJsIsLoaded() {
-  if (!_isLoaded)
-    throw "Polymerize JS is not ready";
-}
-
-//createMap(Map<String, dynamic> m) => m ; // u.jsify(m);
-/*{
-
-  var o = u.newObject();
-  m.forEach((k, v) => u.setProperty(o, k, v));
-  return o;
-}*/

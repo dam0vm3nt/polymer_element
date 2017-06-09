@@ -4,6 +4,7 @@ library polymerize_util;
 
 import 'package:js/js.dart';
 import 'package:polymerize_common/html_import.dart';
+import 'package:polymer_element/polymer_element.dart';
 
 /// A bad work-around to give access to super in mixins.
 @JS()

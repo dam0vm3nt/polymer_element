@@ -1,5 +1,5 @@
 @JS()
-@HtmlImport('observe_support.html')
+@JsMap('packages/polymer_element/src/js/observe_support.js')
 library observe;
 
 import 'dart:async';
@@ -12,14 +12,14 @@ import 'package:polymer_element/require.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 import 'package:polymerize_common/html_import.dart';
+import 'package:polymerize_common/map.dart';
 
-@JS()
-@anonymous
-class _Support {
-  external makeObservable(obj, observer callback, callbackFactory factory);
-  external cancelObserver(obj, observer callback, callbackFactory factory);
-  external List<String> findProps(obj);
-}
+@JS('PolymerizeObservableSupport.makeObservable')
+external _makeObservable(obj, observer callback, callbackFactory factory);
+@JS('PolymerizeObservableSupport.cancelObserver')
+external _cancelObserver(obj, observer callback, callbackFactory factory);
+@JS('PolymerizeObservableSupport.findProps')
+external List<String> _findProps(obj);
 
 typedef CallbackFactoryResult callbackFactory(String property, value);
 
@@ -34,18 +34,8 @@ class CallbackFactoryResult {
 typedef observer(String propertyName, oldValue, newValue);
 
 class ObserveSupport {
-  var _observe_support;
 
-  ObserveSupport._(this._observe_support);
-
-  static ObserveSupport _loaded;
-
-  static Future<ObserveSupport> load() async =>
-      _loaded ??
-      await requireOne('polymer_element/observe_support').then((_observe_support) {
-        _loaded = new ObserveSupport._(_observe_support);
-        return _loaded;
-      });
+  const ObserveSupport();
 
   /***
    * Makes an observable version of "obj". When properties are changed
@@ -54,21 +44,15 @@ class ObserveSupport {
    * Calling it on an already observable object returns the same object but
    * adds a listener.
    */
-  X makeObservable<X>(X obj, {observer callback, callbackFactory factory}) => _observe_support.makeObservable(obj, callback, factory);
+  X makeObservable<X>(X obj, {observer callback, callbackFactory factory}) => _makeObservable(obj, callback, factory);
 
-  cancelObserver(obj, observer callback, [callbackFactory factory]) => _observe_support.cancelObserver(obj, callback, factory);
+  cancelObserver(obj, observer callback, [callbackFactory factory]) => _cancelObserver(obj, callback, factory);
 
-  List<String> findProps(obj) => _observe_support.findProps(obj);
+  List<String> findProps(obj) => _findProps(obj);
 }
 
-ObserveSupport observeSupport;
+const ObserveSupport observeSupport = const ObserveSupport();
 
-@init
-preloadObserveSupport() {
-  ObserveSupport.load().then((x) {
-    observeSupport = x;
-  });
-}
 
 @JS('Object')
 external _JSObject get JSObject;
@@ -121,10 +105,9 @@ class Notifier {
     };
 
     _factory = (String property, value) => new Notifier(null, "${_path}${property}.", _notify)._asResult();
-
   }
 
-  CallbackFactoryResult _asResult() => new CallbackFactoryResult(callback: _callback,factory: _factory);
+  CallbackFactoryResult _asResult() => new CallbackFactoryResult(callback: _callback, factory: _factory);
 
   void uninstall(String propName, oldv) {
     if (oldv != null) {
@@ -150,7 +133,7 @@ class Notifier {
 
         // When new replace (autoinstall option)
         if (p != newv) {
-          new Future(() => setProperty(_obj, propName, p));
+          window.setTimeout(([_])=>setProperty(_obj, propName, p),0);
         }
       }
     }
