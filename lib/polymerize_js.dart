@@ -36,7 +36,8 @@ class Config {
 @anonymous
 class PolymerProperty {
   external bool get notify;
-  external factory PolymerProperty({bool notify});
+  external String get computed;
+  external factory PolymerProperty({bool notify,String computed});
 }
 
 @JS()
