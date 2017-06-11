@@ -133,7 +133,12 @@ class Notifier {
 
         // When new replace (autoinstall option)
         if (p != newv) {
-          window.setTimeout(([_])=>setProperty(_obj, propName, p));
+	  // Set the underlying '__data' instead of _obj otherwise it will trigger a setProperty
+	  var __data = getProperty(_obj,'__data');
+	  if (__data!=null) {
+		setProperty(__data,propName,p);
+          }
+	  // window.setTimeout(([_])=>setProperty(_obj, propName, p));
         }
       }
     }
