@@ -4,20 +4,19 @@ homepage: https://github.com/polymer-dart
 description: Polymer-2 support for Dart
 environment:
     sdk: ">=1.8.0 <2.0.0"
-
-version: 2.0.0
+version: 2.0.2
 dependencies:
   js: any
-  html5: ^0.0.6
-  polymerize_common: ^1.0.0
+  html5: ^0.1.0+1
+  polymerize_common: ^1.0.1
+  polymerize: ^0.9.0
 dev_dependencies:
-  polymerize:
-   path: ../polymerize
+#   path: ../polymerize
 transformers:
  - polymerize
 dependency_overrides:
-  polymerize_common:
-   path: /home/vittorio/Develop/dart/polymerize_common
-  html5:
-   path: ../html_lib
+#  polymerize_common:
+#   path: /home/vittorio/Develop/dart/polymerize_common
+#  html5:
+#   path: ../html_lib
 
