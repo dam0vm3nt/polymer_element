@@ -8,12 +8,10 @@ import 'package:js/js_util.dart' show callMethod;
 import 'package:html5/html.dart';
 
 @JS('require')
-external _require(List modules, Function body);
+external _require(List modules, Function callback,Function errback);
 
-Future<List> require(List<String> modules) async {
-  List result = [];
-  modules.forEach((m) => _require([m], (x) => result.add(x)));
-  return result;
+Future require(module) {
+  Completer done = new Completer();
+  _require([module], (mod) => done.complete(mod),(error)=>done.completeError(error));
+  return done.future;
 }
-
-Future requireOne(String module) async => (await require([module])).single;
