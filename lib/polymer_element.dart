@@ -27,9 +27,10 @@ const _Undefined = const {};
 class EventOptions {
   final bool bubbles;
   final bool cancelable;
+  final bool composed;
   final HTMLElement node;
 
-  const EventOptions({this.bubbles: true, this.cancelable: false, this.node});
+  const EventOptions({this.bubbles: true, this.cancelable: false, this.node, this.composed: true});
 }
 
 Event createCustomEvent(String type, [detail, EventOptions opt = const EventOptions()]) {
@@ -38,11 +39,10 @@ Event createCustomEvent(String type, [detail, EventOptions opt = const EventOpti
       new CustomEventInit()
         ..bubbles = opt.bubbles
         ..cancelable = opt.cancelable
+        ..composed = opt.composed
         ..detail = detail);
   return ev;
 }
-
-getDetail(Event ev) => (new JsObject.fromBrowserObject(ev))['detail'];
 
 @JS('DomRepeat')
 @BowerImport(ref: POLYMER_VERSION, import: 'polymer/lib/elements/dom-repeat.html', name: 'polymer')

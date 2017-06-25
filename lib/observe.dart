@@ -31,10 +31,12 @@ class CallbackFactoryResult {
   external factory CallbackFactoryResult({observer callback, callbackFactory factory});
 }
 
-typedef observer(String propertyName, oldValue, newValue);
+const String MODE_ADDED = 'ADDED';
+const String MODE_DELETED = 'DELETED';
+
+typedef observer(String propertyName, oldValue, newValue, [mode]);
 
 class ObserveSupport {
-
   const ObserveSupport();
 
   /***
@@ -52,7 +54,6 @@ class ObserveSupport {
 }
 
 const ObserveSupport observeSupport = const ObserveSupport();
-
 
 @JS('Object')
 external _JSObject get JSObject;
@@ -100,8 +101,9 @@ class Notifier {
   callbackFactory _factory;
 
   Notifier(this._obj, this._path, this._notify) {
-    _callback = (String propName, oldv, newv) {
-      _notify("${_path}${propName}");
+    _callback = (String propName, oldv, newv, [mode]) {
+      if (mode != MODE_DELETED)
+        _notify("${_path}${propName}");
     };
 
     _factory = (String property, value) => new Notifier(null, "${_path}${property}.", _notify)._asResult();
@@ -133,12 +135,12 @@ class Notifier {
 
         // When new replace (autoinstall option)
         if (p != newv) {
-	  // Set the underlying '__data' instead of _obj otherwise it will trigger a setProperty
-	  var __data = getProperty(_obj,'__data');
-	  if (__data!=null) {
-		setProperty(__data,propName,p);
+          // Set the underlying '__data' instead of _obj otherwise it will trigger a setProperty
+          var __data = getProperty(_obj, '__data');
+          if (__data != null) {
+            setProperty(__data, propName, p);
           }
-	  // window.setTimeout(([_])=>setProperty(_obj, propName, p));
+          // window.setTimeout(([_])=>setProperty(_obj, propName, p));
         }
       }
     }
