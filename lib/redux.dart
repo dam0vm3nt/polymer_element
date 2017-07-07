@@ -6,3 +6,5 @@ class Action<X> {
 
   Action(this._obj);
 }
+
+const String REDUX_INIT_ACTION_NAME = '@@redux/INIT';
