@@ -5,10 +5,9 @@ library polymer_element.redux_local;
 import 'package:js/js.dart';
 import 'package:polymer_element/polymer_element.dart';
 import 'package:polymerize_common/map.dart';
-
+import 'package:polymer_element/redux.dart' as redux;
 
 typedef Reducer(state, ReduxAction action);
-
 
 @JS()
 @anonymous
@@ -17,6 +16,8 @@ class ReduxAction<X> {
   external X get detail;
   external factory ReduxAction({String type, X detail});
 }
+
+redux.Action<X> asAction<X>(ReduxAction<X> a) => new redux.Action<X>(a);
 
 @BowerImport(
     ref: 'polymer-dart/polymer-redux#v2.0.1',
