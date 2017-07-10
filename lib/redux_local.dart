@@ -9,13 +9,7 @@ import 'package:polymer_element/redux.dart' as redux;
 
 typedef Reducer(state, ReduxAction action);
 
-@JS()
-@anonymous
-class ReduxAction<X> {
-  external String get type;
-  external X get detail;
-  external factory ReduxAction({String type, X detail});
-}
+
 
 redux.Action<X> asAction<X>(ReduxAction<X> a) => new redux.Action<X>(a);
 
@@ -25,7 +19,7 @@ redux.Action<X> asAction<X>(ReduxAction<X> a) => new redux.Action<X>(a);
     name: 'polymer-redux')
 @JS("PolymerReduxLocal")
 abstract class ReduxLocalBehavior {
-  external get store;
-  external set store(v);
+  external Store get store;
+  external set store(Store v);
   external dispatch(ReduxAction action);
 }

@@ -64,10 +64,27 @@ external resolveJsObject(String path);
 @JS()
 external defineBehavior([String behaviorName, Type dartClass, Config config]);
 
-@JS('Redux.createStore')
-external createStore(Function reducer);
-
 summary() => new Summary();
 
 @JS()
 external importNative(String tagName, List<String> className);
+
+
+// REDUX : TO BE MOVED IN A SEPARATE LIB
+@JS()
+@anonymous
+class Store {
+  external dispatch(ReduxAction action);
+}
+
+@JS()
+@anonymous
+class ReduxAction<X> {
+  external String get type;
+  external X get detail;
+  external factory ReduxAction({String type, X detail});
+}
+
+
+@JS('Redux.createStore')
+external Store createStore(Function reducer);
