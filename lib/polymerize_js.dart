@@ -48,11 +48,6 @@ class ReduxProperty {
   external factory ReduxProperty({bool notify, String statePath});
 }
 
-@JS()
-@anonymous
-class Action {
-  external factory Action();
-}
 
 @JS()
 @anonymous
