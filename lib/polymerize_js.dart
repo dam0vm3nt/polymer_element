@@ -70,11 +70,16 @@ summary() => new Summary();
 external importNative(String tagName, List<String> className);
 
 
+typedef void StoreListener();
+typedef void Unsubscriber();
+
 // REDUX : TO BE MOVED IN A SEPARATE LIB
 @JS()
 @anonymous
-class Store {
+class Store<X> {
   external dispatch(ReduxAction action);
+  external X getState();
+  external Unsubscriber subscribe(StoreListener listener);
 }
 
 @JS()
