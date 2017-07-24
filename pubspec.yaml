@@ -4,7 +4,7 @@ homepage: https://github.com/polymer-dart
 description: Polymer-2 support for Dart
 environment:
     sdk: ">=1.8.0 <2.0.0"
-version: 2.0.6
+version: 2.0.7-dev
 dependencies:
   js: any
   html5: ^0.1.0+1
