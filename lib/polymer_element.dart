@@ -95,20 +95,24 @@ abstract class TemplateInstanceBase implements PropertyEffects {
   external get parentModel;
 }
 
+typedef void forwardHostPropCallback(property, value);
+typedef void notifyInstancePropCallback(instance, property, value);
+
 @JS()
 @anonymous
 class TemplatizeOptions {
   external bool get mutableData;
   external get parentModel;
   external get instanceProps;
-  external get forwardHostProp;
-  external get notifyInstanceProp;
+  external forwardHostPropCallback get forwardHostProp;
+  external notifyInstancePropCallback get notifyInstanceProp;
 
   external void set mutableData(bool v);
   external void set parentModel(v);
   external void set instanceProps(v);
-  external void set forwardHostProp(v);
-  external void set notifyInstanceProp(v);
+  external void set forwardHostProp(forwardHostPropCallback v);
+  external void set notifyInstanceProp(notifyInstancePropCallback v);
+  external factory TemplatizeOptions({bool mutableData,parentModel,instanceProps,forwardHostPropCallback forwardHostProp,notifyInstancePropCallback notifyInstanceProp});
 }
 
 @JS()
@@ -122,8 +126,15 @@ abstract class TemplatizeModule {
   external modelForElement(host, Element element);
 }
 
+@JS()
+@anonymous
+abstract class TemplateInstance implements PropertyEffects {
+  external List<Node> get children;
+  external DocumentFragment get root;
+}
+
 // Stamp a templatizer class producing the stamped template
-PropertyEffects stamp(templateClass, model) => callConstructor(templateClass, [model]);
+TemplateInstance stamp(templateClass, [List model]) => callConstructor(templateClass, model);
 
 @JS('Templatize')
 external TemplatizeModule get Templatize;
