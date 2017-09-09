@@ -19,6 +19,8 @@ import 'package:polymerize_common/init.dart';
 export 'package:polymerize_common/init.dart';
 export 'metadata_registry.dart';
 
+part 'polymer_element.polymerize.dart';
+
 const String POLYMER_VERSION = "v2.0.1";
 const String WEB_COMPONENTS = "v1.0.1";
 

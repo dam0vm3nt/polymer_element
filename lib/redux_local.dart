@@ -7,6 +7,8 @@ import 'package:polymer_element/polymer_element.dart';
 import 'package:polymerize_common/map.dart';
 import 'package:polymer_element/redux.dart' as redux;
 
+part 'redux_local.polymerize.dart';
+
 typedef Reducer(state, ReduxAction action);
 
 

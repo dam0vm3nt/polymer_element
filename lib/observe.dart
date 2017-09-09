@@ -14,6 +14,8 @@ import 'package:js/js_util.dart';
 import 'package:polymerize_common/html_import.dart';
 import 'package:polymerize_common/map.dart';
 
+part 'observe.polymerize.dart';
+
 @JS('PolymerizeObservableSupport.makeObservable')
 external _makeObservable(obj, observer callback, callbackFactory factory);
 @JS('PolymerizeObservableSupport.cancelObserver')
