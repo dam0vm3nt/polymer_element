@@ -8,7 +8,7 @@ import 'package:polymer_element/dart_callbacks_behavior.dart';
 import 'package:polymer_element/property_observer_behavior.dart';
 import 'package:polymerize_common/init.dart';
 import 'package:polymer_element/polymer_element.dart';
-import 'package:polymer_element/require.dart';
+import 'package:polymer_element/loader.dart';
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
 import 'package:polymerize_common/html_import.dart';
