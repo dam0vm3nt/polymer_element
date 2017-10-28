@@ -21,8 +21,8 @@ export 'metadata_registry.dart';
 
 part 'polymer_element.polymerize.dart';
 
-const String POLYMER_VERSION = "v2.0.1";
-const String WEB_COMPONENTS = "v1.0.1";
+const String POLYMER_VERSION = "v2.2.0";
+const String WEB_COMPONENTS = "v1.0.17";
 
 const _Undefined = const {};
 
