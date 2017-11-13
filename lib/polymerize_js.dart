@@ -38,7 +38,8 @@ class Config {
 class PolymerProperty {
   external bool get notify;
   external String get computed;
-  external factory PolymerProperty({bool notify,String computed});
+  external String get type;
+  external factory PolymerProperty({bool notify,String computed,String type});
 }
 
 @JS()
