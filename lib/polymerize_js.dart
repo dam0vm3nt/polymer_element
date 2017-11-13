@@ -12,6 +12,15 @@ import 'package:polymerize_common/map.dart';
 part 'polymerize_js.polymerize.dart';
 
 @JS()
+external get JSBoolean;
+@JS()
+external get JSString;
+@JS()
+external get JSObject;
+@JS()
+external get JSArray;
+
+@JS()
 @anonymous
 class ReduxInfo {
   external Function get reducer;
@@ -38,8 +47,8 @@ class Config {
 class PolymerProperty {
   external bool get notify;
   external String get computed;
-  external String get type;
-  external factory PolymerProperty({bool notify,String computed,String type});
+  external get type;
+  external factory PolymerProperty({bool notify,String computed,type});
 }
 
 @JS()
