@@ -169,7 +169,7 @@ abstract class ElementMixin implements PropertyEffects {
   external $$(String selector);
 }
 
-@JS('Element')
+@JS('DartElement')
 @BowerImport(ref: POLYMER_VERSION, import: "polymer/polymer.html", name: 'polymer')
 abstract class PolymerElement implements HTMLElement, ElementMixin {
   external get $;
