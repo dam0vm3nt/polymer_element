@@ -7,22 +7,25 @@ type RemoveHandlers<T> = {
     [K in keyof T]: RemoveHandler
 }
 
-interface CallbackFactory<T> {
-    <K extends keyof T>(property: K, val: T[K]): Callback<T[K]>,
+export interface CallbackFactory<T> {
+    <K extends keyof T>(property: K, val: T[K]): CallbackFactoryResult<T[K]>,
     [_sub]?: RemoveHandlers<T>
 }
 
-type CallbackMode = "ADDED" | "DELETED" | undefined;
+export interface CallbackFactoryResult<T> {
+    callback?: Callback<T>,
+    factory?: CallbackFactory<T>,
+}
+
+export type CallbackMode = "ADDED" | "DELETED" | undefined;
 
 export interface Callback<T> {
-    <K extends keyof T>(property?: K, oldVal?: any, value?: any, mode?: CallbackMode): any,
-    callback?: any,
-    factory?: CallbackFactory<T>,
+    <K extends keyof T>(property?: K, oldVal?: T[K], value?: T[K], mode?: CallbackMode): any,
 }
 
 type RemoveHandler = () => void;
 
-class Callbacks<T extends Object> implements ProxyHandler<T> {
+export class Callbacks<T extends Object> implements ProxyHandler<T> {
     cbs: Callback<T>[];
     callbackFactories: CallbackFactory<T>[];
     oldLen: number;
