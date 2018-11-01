@@ -4,3 +4,4 @@ pubspec.lock
 BUILD
 WORKSPACE
 .pub
+node_modules
