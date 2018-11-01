@@ -4,7 +4,7 @@ import {defaultConstructor,namedConstructor,namedFactory,defaultFactory,DartClas
 import * as _common from "@dart2ts/dart/_common";
 import * as core from "@dart2ts/dart/core";
 import * as async from "@dart2ts/dart/async";
-
+/*
 export var require : (module : any) => async.Future<any> = (module : any) : async.Future<any> =>  {
     let done : async.DartCompleter<any> = new async.DartCompleter<any>();
     require(new core.DartList.literal(module),(mod : any) =>  {
@@ -13,6 +13,6 @@ export var require : (module : any) => async.Future<any> = (module : any) : asyn
         return done.completeError(error);
     });
     return done.future;
-};
+};*/
 export class properties {
 }

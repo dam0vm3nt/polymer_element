@@ -21,9 +21,11 @@ export var createCustomEvent : (type : string,detail? : any,opt? : EventOptions)
     } as CustomEventInit));
     return ev;
 };
+/*
 export var stamp : (templateClass : any,model? : core.DartList<any>) => Polymer.TemplateInstance = (templateClass : any,model? : core.DartList<any>) : Polymer.TemplateInstance =>  {
     return js_util.callConstructor(templateClass,model);
 };
+*/
 export namespace EventOptions {
     export type Constructors = 'EventOptions';
     export type Interface = Omit<EventOptions, Constructors>;
@@ -52,7 +54,7 @@ export class EventOptions {
         this.composed = composed;
     }
 }
-
+/*
 export namespace PropertyEffectsUtils {
     export type Constructors = 'PropertyEffectsUtils';
     export type Interface = Omit<PropertyEffectsUtils, Constructors>;
@@ -89,7 +91,7 @@ export class PropertyEffectsUtils {
     PropertyEffectsUtils() {
     }
 }
-
+*/
 export class properties {
     private static __$POLYMER_VERSION : string;
     static get POLYMER_VERSION() : string { 

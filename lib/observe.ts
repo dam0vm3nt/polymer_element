@@ -33,7 +33,7 @@ export class ObserveSupport {
         }, _namedArguments);
         return PolymerizeObservableSupport.makeObservable(obj, callback, factory);
     }
-    cancelObserver(obj: any, callback: Callback<any>, factory?: CallbackFactory<any>) {
+    cancelObserver<X>(obj: X, callback: Callback<X>, factory?: CallbackFactory<X>) {
         return PolymerizeObservableSupport.cancelObserver(obj, callback, factory);
     }
     findProps(obj: any): core.DartList<string> {

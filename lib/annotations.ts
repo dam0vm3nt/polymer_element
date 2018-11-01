@@ -17,12 +17,12 @@ export class PolymerRegister {
 
     native : boolean;
 
-    uses : core.DartList<core.Type>;
+    uses : core.DartList<any>;
 
-    constructor(tagName : string,_namedArguments? : {template? : string,native? : boolean,uses? : core.DartList<core.Type>}) {
+    constructor(tagName : string,_namedArguments? : {template? : string,native? : boolean,uses? : core.DartList<any>}) {
     }
     @defaultConstructor
-    PolymerRegister(tagName : string,_namedArguments? : {template? : string,native? : boolean,uses? : core.DartList<core.Type>}) {
+    PolymerRegister(tagName : string,_namedArguments? : {template? : string,native? : boolean,uses? : core.DartList<any>}) {
         let {template,native,uses} = Object.assign({
             "native" : false}, _namedArguments );
         this.tagName = tagName;
@@ -47,11 +47,11 @@ export class BowerImport {
     constructor(_namedArguments? : {ref? : string,import? : string,name? : string}) {
     }
     @defaultConstructor
-    BowerImport(_namedArguments? : {ref? : string,import? : string,name? : string}) {
-        let {ref,import,name} = Object.assign({
+    BowerImport(_namedArguments? : {ref? : string,_import? : string,name? : string}) {
+        let {ref,_import,name} = Object.assign({
         }, _namedArguments );
         this.ref = ref;
-        this.import = import;
+        this.import = _import;
         this.name = name;
     }
 }

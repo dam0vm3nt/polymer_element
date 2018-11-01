@@ -4,10 +4,10 @@ import {defaultConstructor,namedConstructor,namedFactory,defaultFactory,DartClas
 import * as _common from "@dart2ts/dart/_common";
 import * as core from "@dart2ts/dart/core";
 import * as async from "@dart2ts/dart/async";
-
+/*
 export var summary : () => any = () =>  {
     return {
     } as Polymerize.Summary;
-};
+};*/
 export class properties {
 }

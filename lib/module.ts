@@ -67,7 +67,7 @@ export class Module {
         });
     }
     executeMethod(path : string,name : string,args : core.DartList<any>) {
-        return this._jsObject[name].apply(this._jsObject,args);
+        return this._jsObject[path][name].apply(this._jsObject[path],args);
         //return this._helper.callMethod('execute',new core.DartList.literal(this._jsObject,path,name,args));
     }
     getProperty(path : string,name : string) {
